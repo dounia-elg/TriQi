@@ -10,7 +10,12 @@ export class UsersService {
     private userModel: Model<UserDocument>,
   ) {}
 
-  async findAll() {
-    return this.userModel.find();
+  async findByEmail(email: string): Promise<UserDocument | null> {
+    return this.userModel.findOne({ email });
+  }
+  
+  async create(data: Partial<User>): Promise<UserDocument> {
+    const newUser = new this.userModel(data);
+    return newUser.save();
   }
 }
