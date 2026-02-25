@@ -6,6 +6,7 @@ import { ScoringService } from './scoring.service';
 import { Result, ResultSchema } from './result.schema';
 import { QuestionsModule } from '../questions/questions.module';
 import { DomainsModule } from '../domains/domains.module';
+import { ExplanationService } from './explanation.service';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { DomainsModule } from '../domains/domains.module';
     DomainsModule,
   ],
   controllers: [ResultsController],
-  providers: [ResultsService, ScoringService],
+  providers: [ResultsService, ScoringService, ExplanationService],
   exports: [ResultsService],
 })
 export class ResultsModule {}
