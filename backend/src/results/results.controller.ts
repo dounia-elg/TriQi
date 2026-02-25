@@ -9,12 +9,18 @@ export class ResultsController {
   constructor(private resultsService: ResultsService) {}
 
   @Post('submit')
-  submitTest(@Request() req: { user: { id: string } }, @Body() dto: SubmitTestDto) {
+  submitTest(@Request() req: { user: { id: string } },   
+  @Body() dto: SubmitTestDto) {
     return this.resultsService.submitTest(req.user.id, dto);
   }
 
   @Get('my')
   getMyResults(@Request() req: { user: { id: string } }) {
     return this.resultsService.findByUser(req.user.id);
+  }
+
+  @Get('my/latest')
+  getLatestResult(@Request() req: { user: { id: string } }) {
+    return this.resultsService.findLatestByUser(req.user.id);
   }
 }
