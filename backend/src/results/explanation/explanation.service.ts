@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ScoredDomain } from './scoring.service';
+import { ScoredDomain } from '../scoring/scoring.service';
 
 export type Intensity = 'high' | 'medium' | 'low';
 

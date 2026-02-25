@@ -8,10 +8,10 @@ describe('ExplanationService', () => {
   });
 
   const mockScores = [
-    { domainId: 'd1', domainName: 'Informatique', score: 20 }, 
-    { domainId: 'd2', domainName: 'Commerce',     score: 14 }, 
-    { domainId: 'd3', domainName: 'Art',          score: 8  }, 
-    { domainId: 'd4', domainName: 'Droit',        score: 3  }, 
+    { domainId: 'd1', domainName: 'Informatique', score: 20 },
+    { domainId: 'd2', domainName: 'Commerce', score: 14 },
+    { domainId: 'd3', domainName: 'Art', score: 8 },
+    { domainId: 'd4', domainName: 'Droit', score: 3 },
   ];
 
   it('should return explanations for top 3 domains only', () => {
@@ -40,7 +40,7 @@ describe('ExplanationService', () => {
   it('should assign LOW intensity when score < 40% of top', () => {
     const scores = [
       { domainId: 'd1', domainName: 'Informatique', score: 20 },
-      { domainId: 'd2', domainName: 'Droit',        score: 3 }, 
+      { domainId: 'd2', domainName: 'Droit', score: 3 },
     ];
     const result = service.generateExplanations(scores, 2);
     expect(result[1].intensity).toBe('low');

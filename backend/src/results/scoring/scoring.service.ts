@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { QuestionDocument } from '../questions/question.schema';
-import { DomainDocument } from '../domains/domain.schema';
+import { QuestionDocument } from '../../questions/question.schema';
+import { DomainDocument } from '../../domains/domain.schema';
 
 export interface RawAnswer {
   questionId: string;
