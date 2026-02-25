@@ -24,6 +24,16 @@ export class UserAnswer {
   choiceIndex: number;
 }
 
+@Schema({ _id: false })
+export class DomainExplanation {
+  @Prop({ required: true })
+  domainName: string;
+  @Prop({ required: true, enum: ['high', 'medium', 'low'] })
+  intensity: string;
+  @Prop({ required: true })
+  text: string;
+}
+
 @Schema({ timestamps: true })
 export class Result {
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
@@ -34,6 +44,9 @@ export class Result {
 
   @Prop({ type: [DomainScore], required: true })
   domainScores: DomainScore[];
+
+  @Prop({ type: [DomainExplanation], required: true })
+  explanations: DomainExplanation[];
 
   @Prop({ required: true })
   totalQuestions: number;
