@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { DomainsModule } from './domains/domains.module';
 import { QuestionsModule } from './questions/questions.module';
 import { ResultsModule } from './results/results.module'; 
+import { CategoriesModule } from './categories/categories.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -25,6 +26,7 @@ import { AppService } from './app.service';
     DomainsModule,
     QuestionsModule,
     ResultsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
