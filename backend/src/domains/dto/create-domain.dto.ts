@@ -1,4 +1,4 @@
-import { IsArray, IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsNotEmpty, IsMongoId, IsOptional, IsString } from 'class-validator';
 
 export class CreateDomainDto {
   @IsString()
@@ -9,9 +9,8 @@ export class CreateDomainDto {
   @IsNotEmpty()
   description: string;
 
-  @IsString()
-  @IsNotEmpty()
-  category: string;
+  @IsMongoId()
+  categoryId: string;
 
   @IsOptional()
   @IsArray()

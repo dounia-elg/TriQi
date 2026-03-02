@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type DomainDocument = Domain & Document;
 
@@ -11,13 +11,13 @@ export class Domain {
   @Prop({ required: true })
   description: string;
 
-  @Prop({ required: true })
-  category: string;
+  @Prop({ type: Types.ObjectId, ref: 'Category', required: true })
+  categoryId: Types.ObjectId;
 
   @Prop({ type: [String], default: [] })
   skills: string[];
 
-  @Prop({ default: true })
+  @Prop({ default: true })  
   isActive: boolean;
 }
 
