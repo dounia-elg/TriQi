@@ -7,6 +7,7 @@ import { DomainsModule } from './domains/domains.module';
 import { QuestionsModule } from './questions/questions.module';
 import { ResultsModule } from './results/results.module'; 
 import { CategoriesModule } from './categories/categories.module';
+import { RoadmapTemplatesModule } from './roadmap-templates/roadmap-templates.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -27,6 +28,7 @@ import { AppService } from './app.service';
     QuestionsModule,
     ResultsModule,
     CategoriesModule,
+    RoadmapTemplatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
