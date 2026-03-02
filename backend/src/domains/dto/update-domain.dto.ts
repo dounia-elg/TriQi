@@ -1,4 +1,4 @@
-import { IsArray, IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsMongoId, IsOptional, IsString } from 'class-validator';
 
 export class UpdateDomainDto {
   @IsOptional()
@@ -10,8 +10,8 @@ export class UpdateDomainDto {
   description?: string;
 
   @IsOptional()
-  @IsString()
-  category?: string;
+  @IsMongoId()
+  categoryId?: string;
 
   @IsOptional()
   @IsArray()
@@ -20,5 +20,5 @@ export class UpdateDomainDto {
 
   @IsOptional()
   @IsBoolean()
-  isActive?: boolean;
+  isActive?: boolean;   
 }
