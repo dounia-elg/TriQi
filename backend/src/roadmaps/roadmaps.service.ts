@@ -95,4 +95,39 @@ export class RoadmapsService {
 
     return roadmap.save();
   }
+
+  async getStats(userId: string) {
+    const roadmap = await this.roadmapModel
+        .findOne({ userId: new Types.ObjectId(userId) })
+        .sort({ createdAt: -1 });
+
+    if (!roadmap) {
+        return {
+        hasRoadmap: false,
+        progressPercent: 0,
+        totalTasks: 0,
+        doneTasks: 0,
+        pendingTasks: 0,
+        totalWeeks: 0,
+        durationMonths: 0,
+        topDomains: [],
+        };
+    }
+
+    const allTasks = roadmap.weeks.flatMap((w) => w.tasks);
+    const doneTasks = allTasks.filter((t) => t.status === TaskStatus.DONE).length;
+    const pendingTasks = allTasks.length - doneTasks;
+
+    return {
+        hasRoadmap: true,
+        progressPercent: roadmap.progressPercent,
+        totalTasks: allTasks.length,
+        doneTasks,
+        pendingTasks,
+        totalWeeks: roadmap.weeks.length,
+        durationMonths: roadmap.durationMonths,
+        topDomains: roadmap.topDomains,
+    };
+    }
+
 }
