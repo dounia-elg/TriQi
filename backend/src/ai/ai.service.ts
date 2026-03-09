@@ -6,7 +6,10 @@ import { ConfigService } from '@nestjs/config';
 export class AiService {
   constructor(private configService: ConfigService) {}
 
-  async generateInstitutionInsights(prompt: string): Promise<string> {
+  async generateInstitutionInsights(prompt: string): Promise<{
+    explanation: string;
+    advice: string[];
+  }> {
     const apiKey = this.configService.get<string>('OPENROUTER_API_KEY');
     const model =
       this.configService.get<string>('OPENROUTER_MODEL') ||
@@ -24,7 +27,7 @@ export class AiService {
           {
             role: 'system',
             content:
-              'You are an educational and career guidance assistant. Your role is to explain why an institution matches a student profile and provide short actionable advice.',
+              'You are an educational and career guidance assistant. Return only valid JSON with this format: {"explanation":"string","advice":["tip1","tip2"]}',
           },
           {
             role: 'user',
@@ -40,6 +43,19 @@ export class AiService {
       },
     );
 
-    return response.data.choices[0].message.content;
+    const content = response.data.choices[0].message.content;
+
+    try {
+      return JSON.parse(content);
+    } catch {
+      return {
+        explanation:
+          'This institution is suitable because it offers programs related to your interests.',
+        advice: [
+          'Strengthen your skills in this field.',
+          'Explore projects or internships related to this domain.',
+        ],
+      };
+    }
   }
 }
