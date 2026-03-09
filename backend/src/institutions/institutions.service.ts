@@ -5,6 +5,7 @@ import { Institution, InstitutionDocument } from './institution.schema';
 import { CreateInstitutionDto } from './dto/create-institution.dto';
 import { UpdateInstitutionDto } from './dto/update-institution.dto';
 import { DomainsService } from '../domains/domains.service';
+import { RecommendationService } from './recommendation.service';
 
 @Injectable()
 export class InstitutionsService {
@@ -12,6 +13,7 @@ export class InstitutionsService {
     @InjectModel(Institution.name)
     private institutionModel: Model<InstitutionDocument>,
     private domainsService: DomainsService,
+    private recommendationService: RecommendationService,
   ) {}
 
   private async validateDomainIds(domainIds: string[]): Promise<void> {
@@ -55,6 +57,23 @@ export class InstitutionsService {
       isActive: true,
     });
   }
+
+  async findRecommended(
+    domainIds?: string[],
+    country?: string,
+    city?: string,
+  ): Promise<InstitutionDocument[]> {
+
+    let institutions: InstitutionDocument[];
+    if (domainIds && domainIds.length > 0) {
+      institutions = await this.findByDomains(domainIds);
+    } else {
+      institutions = await this.findAll();
+    }
+    
+    return this.recommendationService.rank(institutions, domainIds, country, city);
+  }
+
 
   async update(
     id: string,
