@@ -11,6 +11,7 @@ import { RoadmapTemplatesModule } from './roadmap-templates/roadmap-templates.mo
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AiModule } from './ai/ai.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { AppService } from './app.service';
     ResultsModule,
     CategoriesModule,
     RoadmapTemplatesModule,
+    AiModule,
   ],
   controllers: [AppController],
   providers: [AppService],
