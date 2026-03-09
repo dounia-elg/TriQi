@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { InstitutionsService } from './institutions.service';
@@ -15,6 +16,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role } from '../users/role.enum';
+import { RecommendationQueryDto } from './dto/recommendation-query.dto';
 
 @Controller('institutions')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -35,6 +37,11 @@ export class InstitutionsController {
   @Get('admin')
   findAllAdmin() {
     return this.institutionsService.findAllAdmin();
+  }
+
+  @Get('recommended')
+  findRecommended(@Query() query: RecommendationQueryDto) {
+    return this.institutionsService.findRecommended(query.domainIds, query.country, query.city);
   }
 
   @Get(':id')
