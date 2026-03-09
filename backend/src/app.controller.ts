@@ -13,18 +13,16 @@ export class AppController {
   @Get('ai-test')
   async testAi() {
     const prompt = `
-      User top domains: Computer Science, Technology
+      Student interests: Computer Science, Technology
 
       Institution:
       Name: ENSA
       Country: Morocco
       Programs: Software Engineering, Artificial Intelligence
-
-      Explain why this institution fits the student and give 2 short advice.
-    `;
+      `;
 
     const result = await this.aiService.generateInstitutionInsights(prompt);
 
-    return { aiResponse: result };
+    return result;
   }
 }
