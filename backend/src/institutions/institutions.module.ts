@@ -4,6 +4,7 @@ import { InstitutionsService } from './institutions.service';
 import { Institution, InstitutionSchema } from './institution.schema';
 import { InstitutionsController } from './institutions.controller';
 import { DomainsModule } from '../domains/domains.module';
+import { RecommendationService } from './recommendation.service';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { DomainsModule } from '../domains/domains.module';
     DomainsModule,
   ],
   controllers: [InstitutionsController],
-  providers: [InstitutionsService],
+  providers: [InstitutionsService, RecommendationService],
   exports: [InstitutionsService],
 })
 export class InstitutionsModule {}
