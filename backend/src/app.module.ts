@@ -8,6 +8,7 @@ import { QuestionsModule } from './questions/questions.module';
 import { ResultsModule } from './results/results.module'; 
 import { CategoriesModule } from './categories/categories.module';
 import { RoadmapTemplatesModule } from './roadmap-templates/roadmap-templates.module';
+import { InstitutionsModule } from './institutions/institutions.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -31,6 +32,7 @@ import { AiModule } from './ai/ai.module';
     CategoriesModule,
     RoadmapTemplatesModule,
     AiModule,
+    InstitutionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
