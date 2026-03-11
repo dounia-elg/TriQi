@@ -6,10 +6,10 @@ import { InstitutionDocument } from './institution.schema';
 export class InstitutionsAIService {
   constructor(private aiService: AiService) {}
 
-  async generateExplanation(
+  async generateInsights(
     institution: InstitutionDocument,
     userScores: any[],
-  ): Promise<string> {
+  ): Promise<{ explanation: string; advice: string[] }> {
     const scoresContext = userScores
       .map((s) => `${s.domainName}: ${s.score}`)
       .join(', ');
@@ -20,10 +20,10 @@ export class InstitutionsAIService {
       Programs offered: ${institution.programs.join(', ')}.
       Location: ${institution.city}, ${institution.country}.
       
-      Explain in one or two simple, encouraging sentences why this institution is a great match for this user based on their top scores and the programs offered.
+      1. Explain in one or two simple, encouraging sentences why this institution is a great match for this user based on their top scores and programs.
+      2. Provide 1 to 3 very short, actionable, and practical tips to help the user prepare for this institution (e.g., "Strengthen your portfolio", "Apply before May", "Join a local club").
     `;
 
-    const insights = await this.aiService.generateInstitutionInsights(prompt);
-    return insights.explanation;
+    return this.aiService.generateInstitutionInsights(prompt);
   }
 }
