@@ -58,4 +58,35 @@ export class AiService {
       };
     }
   }
+
+    async generateSuggestions(prompt: string): Promise<string[]> {
+    const apiKey = this.configService.get<string>('OPENROUTER_API_KEY');
+    const model = this.configService.get<string>('OPENROUTER_MODEL') || 'openai/gpt-4o-mini';
+
+    if (!apiKey) throw new Error('OPENROUTER_API_KEY is missing');
+
+    const response = await axios.post(
+      'https://openrouter.ai/api/v1/chat/completions',
+      {
+        model,
+        messages: [
+          {
+            role: 'system',
+            content: 'You are an educational assistant. Return only a valid JSON array of strings: ["Name 1", "Name 2", ...]',
+          },
+          { role: 'user', content: prompt },
+        ],
+      },
+      {
+        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      },
+    );
+
+    try {
+      return JSON.parse(response.data.choices[0].message.content);
+    } catch {
+      return []; 
+    }
+  }
+
 }

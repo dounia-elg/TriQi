@@ -26,4 +26,10 @@ export class InstitutionsAIService {
 
     return this.aiService.generateInstitutionInsights(prompt);
   }
+
+    async suggestInstitutions(domain: string, country: string): Promise<string[]> {
+    const prompt = `Suggest 5 well-known and real universities or schools specializing in "${domain}" located in "${country}". Return only their names.`;
+    return this.aiService.generateSuggestions(prompt);
+  }
+
 }
