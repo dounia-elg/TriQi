@@ -62,14 +62,13 @@ export class InstitutionsService {
     });
   }
 
-  async findRecommended(
+    async findRecommended(
     userId: string,
     domainIds?: string[],
     country?: string,
     city?: string,
-  ): Promise<InstitutionDocument[]> {
-
-   let institutions: InstitutionDocument[];
+  ): Promise<any[]> { 
+    let institutions: InstitutionDocument[];
     if (domainIds && domainIds.length > 0) {
       institutions = await this.findByDomains(domainIds);
     } else {
@@ -79,17 +78,20 @@ export class InstitutionsService {
     const rankedInstitutions = this.recommendationService.rank(institutions, domainIds, country, city);
     const latestResult = await this.resultsService.findLatestByUser(userId);
     const userScores = latestResult ? latestResult.domainScores : [];
+
     const enhancedResults = await Promise.all(
       rankedInstitutions.map(async (inst) => {
-        const explanation = await this.institutionsAIService.generateExplanation(inst, userScores);
+        const insights = await this.institutionsAIService.generateInsights(inst, userScores);
         return {
           ...inst.toObject(),
-          aiExplanation: explanation,
+          aiExplanation: insights.explanation,
+          aiAdvice: insights.advice,
         };
       }),
     );
     return enhancedResults;
   }
+
 
 
   async update(
