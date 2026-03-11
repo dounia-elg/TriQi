@@ -7,12 +7,14 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role } from '../users/role.enum';
 import { RecommendationQueryDto } from './dto/recommendation-query.dto';
-import { GetUser } from '../auth/decorators/get-user.decorator'; 
+import { GetUser } from '../auth/decorators/get-user.decorator';
+import { SuggestInstitutionsDto } from './dto/suggest-institutions.dto';
+import { InstitutionsAIService } from './institutions-ai.service'; 
 
 @Controller('institutions')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class InstitutionsController {
-  constructor(private institutionsService: InstitutionsService) {}
+  constructor(private institutionsService: InstitutionsService, private institutionsAIService: InstitutionsAIService) {}
 
   @Post()
   @Roles(Role.ADMIN)
@@ -62,5 +64,11 @@ export class InstitutionsController {
   @Roles(Role.ADMIN)
   remove(@Param('id') id: string) {
     return this.institutionsService.remove(id);
+  }
+
+  @Post('admin/suggest')
+  @Roles(Role.ADMIN) 
+  suggestInstitutions(@Body() dto: SuggestInstitutionsDto) {
+    return this.institutionsAIService.suggestInstitutions(dto.domain, dto.country);
   }
 }
