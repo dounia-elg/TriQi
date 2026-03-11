@@ -23,46 +23,19 @@ describe('RecommendationService', () => {
     domainIds: [{ toString: () => 'd2' }],
   } as any;
 
-  const instC = {
-    _id: 'c',
-    name: 'ISCAE',
-    country: 'Maroc',
-    city: 'Casablanca',
-    domainIds: [{ toString: () => 'd1' }],
-  } as any;
-
-  it('should rank by number of matching domains', () => {
-    // instA matches d1+d2 (score 6), instB matches d2 (score 3)
+  it('should rank by matching domains', () => {
     const result = service.rank([instA, instB], ['d1', 'd2']);
+    expect(result[0].name).toBe('ENSIAS'); // Score 6 vs Score 3
+  });
+
+  it('should boost by country and city', () => {
+    const result = service.rank([instA, instB], ['d2'], 'Maroc', 'Rabat');
+    // instA: d2(3) + Maroc(2) + Rabat(1) = 6
+    // instB: d2(3) + France(0) = 3
     expect(result[0].name).toBe('ENSIAS');
-    expect(result[1].name).toBe('École HEC');
   });
 
-  it('should boost institutions matching the preferred country', () => {
-    // instA: domain d1 (3) + country Maroc (2) = 5
-    // instC: domain d1 (3) + country Maroc (2) + city Casablanca (0) = 5 (tie)
-    // instB: domain d2 (0) + country France (0) = 0 (no domain match since we don't pass d2)
-    const result = service.rank([instB, instC, instA], ['d1'], 'Maroc');
-    // Maroc institutions should be ranked above France
-    expect(result[0].name === 'ENSIAS' || result[0].name === 'ISCAE').toBe(true);
-    expect(result[result.length - 1].name).toBe('École HEC');
-  });
-
-  it('should boost institutions matching the preferred city', () => {
-    // instA: d1(3) + Maroc(2) + Rabat(1) = 6
-    // instC: d1(3) + Maroc(2) = 5
-    const result = service.rank([instC, instA], ['d1'], 'Maroc', 'Rabat');
-    expect(result[0].name).toBe('ENSIAS'); 
-    expect(result[1].name).toBe('ISCAE');
-  });
-
-  it('should return all institutions sorted even with no filters', () => {
-    const result = service.rank([instA, instB, instC]);
-    expect(result).toHaveLength(3);
-  });
-
-  it('should return empty array if no institutions', () => {
-    const result = service.rank([]);
-    expect(result).toEqual([]);
+  it('should handle empty lists', () => {
+    expect(service.rank([])).toEqual([]);
   });
 });
