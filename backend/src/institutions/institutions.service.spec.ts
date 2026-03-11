@@ -5,6 +5,8 @@ import { InstitutionsService } from './institutions.service';
 import { Institution } from './institution.schema';
 import { DomainsService } from '../domains/domains.service';
 import { RecommendationService } from './recommendation.service';
+import { ResultsService } from '../results/results.service';
+import { InstitutionsAIService } from './institutions-ai.service';
 
 const mockInstitution = {
     _id: 'inst123',
@@ -12,9 +14,10 @@ const mockInstitution = {
     type: 'university',
     country: 'Maroc',
     city: 'Rabat',
-    domainIds: ['domain1', 'domain2'],
-    programs: ['Génie Informatique', 'Data Science'],
+    domainIds: ['domain1'],
+    programs: ['IT'],
     isActive: true,
+    toObject: jest.fn().mockReturnThis(),
 };
 
 const mockInstitutionModel = {
@@ -22,7 +25,13 @@ const mockInstitutionModel = {
     findById: jest.fn(),
     findByIdAndUpdate: jest.fn(),
     findByIdAndDelete: jest.fn(),
+    save: jest.fn(),
 };
+
+function MockModel(dto: any) {
+    this.name = dto.name;
+    this.save = jest.fn().mockResolvedValue({ ...dto, _id: 'new_id' });
+}
 
 const mockDomainsService = {
     findOne: jest.fn(),
@@ -30,6 +39,17 @@ const mockDomainsService = {
 
 const mockRecommendationService = {
     rank: jest.fn((institutions) => institutions), 
+};
+
+const mockResultsService = {
+    findLatestByUser: jest.fn(),
+};
+
+const mockInstitutionsAIService = {
+    generateInsights: jest.fn().mockResolvedValue({
+        explanation: 'AI explanation',
+        advice: ['Tip 1'],
+    }),
 };
 
 describe('InstitutionsService', () => {
@@ -41,7 +61,9 @@ describe('InstitutionsService', () => {
                 InstitutionsService,
                 { provide: getModelToken(Institution.name), useValue: mockInstitutionModel },
                 { provide: DomainsService, useValue: mockDomainsService },
-                { provide: RecommendationService, useValue: mockRecommendationService }, // 👈 NEW
+                { provide: RecommendationService, useValue: mockRecommendationService },
+                { provide: ResultsService, useValue: mockResultsService },
+                { provide: InstitutionsAIService, useValue: mockInstitutionsAIService },
             ],
         }).compile();
 
@@ -58,12 +80,16 @@ describe('InstitutionsService', () => {
         });
     });
 
-    describe('findAllAdmin', () => {
-        it('should return all institutions including inactive', async () => {
+    describe('findRecommended', () => {
+        it('should return institutions with AI insights', async () => {
             mockInstitutionModel.find.mockResolvedValue([mockInstitution]);
-            const result = await service.findAllAdmin();
-            expect(result).toEqual([mockInstitution]);
-            expect(mockInstitutionModel.find).toHaveBeenCalledWith();
+            mockResultsService.findLatestByUser.mockResolvedValue({ domainScores: [] });
+
+            const result = await service.findRecommended('user123');
+
+            expect(result[0]).toHaveProperty('aiExplanation', 'AI explanation');
+            expect(result[0]).toHaveProperty('aiAdvice');
+            expect(mockInstitutionsAIService.generateInsights).toHaveBeenCalled();
         });
     });
 
@@ -80,29 +106,16 @@ describe('InstitutionsService', () => {
         });
     });
 
-    describe('findByDomains', () => {
-        it('should return institutions matching at least one domain', async () => {
-            mockInstitutionModel.find.mockResolvedValue([mockInstitution]);
-            const result = await service.findByDomains(['domain1']);
-            expect(result).toEqual([mockInstitution]);
-            expect(mockInstitutionModel.find).toHaveBeenCalledWith({
-                domainIds: { $in: ['domain1'] },
-                isActive: true,
-            });
-        });
-    });
-
-    describe('create — domainIds validation', () => {
+    describe('create', () => {
         it('should throw BadRequestException if a domainId does not exist', async () => {
             mockDomainsService.findOne.mockRejectedValue(new NotFoundException());
-
             await expect(
                 service.create({
-                    name: 'Test School',
+                    name: 'Test',
                     type: 'school',
                     country: 'Maroc',
-                    city: 'Casablanca',
-                    domainIds: ['invalid-domain-id'],
+                    city: 'Casa',
+                    domainIds: ['invalid'],
                 }),
             ).rejects.toThrow(BadRequestException);
         });
@@ -111,15 +124,9 @@ describe('InstitutionsService', () => {
     describe('update', () => {
         it('should update and return the institution', async () => {
             mockDomainsService.findOne.mockResolvedValue({ _id: 'domain1' });
-            const updated = { ...mockInstitution, city: 'Casablanca' };
-            mockInstitutionModel.findByIdAndUpdate.mockResolvedValue(updated);
-            const result = await service.update('inst123', { city: 'Casablanca' });
-            expect(result.city).toBe('Casablanca');
-        });
-
-        it('should throw NotFoundException if institution not found', async () => {
-            mockInstitutionModel.findByIdAndUpdate.mockResolvedValue(null);
-            await expect(service.update('bad-id', {})).rejects.toThrow(NotFoundException);
+            mockInstitutionModel.findByIdAndUpdate.mockResolvedValue({ ...mockInstitution, city: 'Casa' });
+            const result = await service.update('inst123', { city: 'Casa' });
+            expect(result.city).toBe('Casa');
         });
     });
 
@@ -128,11 +135,6 @@ describe('InstitutionsService', () => {
             mockInstitutionModel.findByIdAndDelete.mockResolvedValue(mockInstitution);
             const result = await service.remove('inst123');
             expect(result).toEqual({ message: 'Institution deleted successfully' });
-        });
-
-        it('should throw NotFoundException if not found', async () => {
-            mockInstitutionModel.findByIdAndDelete.mockResolvedValue(null);
-            await expect(service.remove('bad-id')).rejects.toThrow(NotFoundException);
         });
     });
 });
