@@ -6,6 +6,8 @@ import { CreateInstitutionDto } from './dto/create-institution.dto';
 import { UpdateInstitutionDto } from './dto/update-institution.dto';
 import { DomainsService } from '../domains/domains.service';
 import { RecommendationService } from './recommendation.service';
+import { ResultsService } from '../results/results.service';
+import { InstitutionsAIService } from './institutions-ai.service';
 
 @Injectable()
 export class InstitutionsService {
@@ -14,6 +16,8 @@ export class InstitutionsService {
     private institutionModel: Model<InstitutionDocument>,
     private domainsService: DomainsService,
     private recommendationService: RecommendationService,
+    private resultsService: ResultsService,
+    private institutionsAIService: InstitutionsAIService,
   ) {}
 
   private async validateDomainIds(domainIds: string[]): Promise<void> {
@@ -59,19 +63,32 @@ export class InstitutionsService {
   }
 
   async findRecommended(
+    userId: string,
     domainIds?: string[],
     country?: string,
     city?: string,
   ): Promise<InstitutionDocument[]> {
 
-    let institutions: InstitutionDocument[];
+   let institutions: InstitutionDocument[];
     if (domainIds && domainIds.length > 0) {
       institutions = await this.findByDomains(domainIds);
     } else {
       institutions = await this.findAll();
     }
     
-    return this.recommendationService.rank(institutions, domainIds, country, city);
+    const rankedInstitutions = this.recommendationService.rank(institutions, domainIds, country, city);
+    const latestResult = await this.resultsService.findLatestByUser(userId);
+    const userScores = latestResult ? latestResult.domainScores : [];
+    const enhancedResults = await Promise.all(
+      rankedInstitutions.map(async (inst) => {
+        const explanation = await this.institutionsAIService.generateExplanation(inst, userScores);
+        return {
+          ...inst.toObject(),
+          aiExplanation: explanation,
+        };
+      }),
+    );
+    return enhancedResults;
   }
 
 
