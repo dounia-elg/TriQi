@@ -17,4 +17,4 @@ import { RecommendationService } from './recommendation.service';
   providers: [InstitutionsService, RecommendationService],
   exports: [InstitutionsService],
 })
-export class InstitutionsModule {}
+export class InstitutionsModule { }
