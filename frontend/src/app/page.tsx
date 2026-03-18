@@ -1,9 +1,21 @@
+import Navbar from '@/components/Navbar';
+import HeroSection from '@/components/HeroSection';
+import HowItWorks from '@/components/HowItWorks';
+import Features from '@/components/Features';
+import WhyTriQi from '@/components/WhyTriQi';
+import Footer from '@/components/Footer';
+
 export default function HomePage() {
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <h1 className="text-3xl font-bold text-blue-600">
-        🧭 TriQi Frontend — Coming Soon!
-      </h1>
-    </main>
+    <>
+      <Navbar />
+      <main>
+        <HeroSection />
+        <HowItWorks />
+        <Features />
+        <WhyTriQi />
+      </main>
+      <Footer />
+    </>
   );
 }
