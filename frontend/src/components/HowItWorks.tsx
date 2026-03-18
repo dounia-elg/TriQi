@@ -1,54 +1,74 @@
+import { ClipboardList, BarChart2, Map, Building2 } from 'lucide-react';
+
 const steps = [
   {
     number: '01',
-    icon: '📝',
+    Icon: ClipboardList,
     title: 'Take the Test',
     description: 'Answer questions about your interests, personality, and abilities.',
   },
   {
     number: '02',
-    icon: '📊',
+    Icon: BarChart2,
     title: 'Get Your Results',
-    description: 'Our engine ranks the domains that match you best, with explanations.',
+    description: 'Our engine ranks the domains that match you best, with clear explanations.',
   },
   {
     number: '03',
-    icon: '🗺️',
+    Icon: Map,
     title: 'Follow Your Roadmap',
-    description: 'Get a personalized 3 or 6-month action plan to guide your journey.',
+    description: 'A week-by-week action plan for 3 or 6 months, tailored to you.',
   },
   {
     number: '04',
-    icon: '🏫',
+    Icon: Building2,
     title: 'Find Your Institution',
-    description: 'Discover schools and programs that match your profile.',
+    description: 'Discover schools and programs in Morocco that fit your profile.',
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 px-4 bg-white">
+    <section id="how-it-works" className="py-28 px-4" style={{ backgroundColor: '#0D0D12' }}>
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
-          <p className="text-lg text-gray-600 max-w-xl mx-auto">
-            From zero clarity to a clear direction — in 4 simple steps.
+          <span className="section-label mb-3">The Process</span>
+          <h2 className="section-title text-4xl md:text-5xl mb-4">How It Works</h2>
+          <p className="section-body max-w-lg mx-auto text-lg">
+            From zero clarity to a clear direction — in 4 steps.
           </p>
         </div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {steps.map((step) => (
             <div
-              key={index}
-              className="bg-gradient-to-b from-indigo-50 to-white border border-indigo-100 rounded-2xl p-6"
+              key={step.number}
+              className="card p-6"
+              style={{ position: 'relative', overflow: 'hidden' }}
             >
-              <div className="text-4xl mb-4">{step.icon}</div>
-              <span className="text-xs font-bold text-indigo-400 tracking-widest">{step.number}</span>
-              <h3 className="text-lg font-bold text-gray-900 mt-2 mb-2">{step.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+              {/* Decorative background number */}
+              <div
+                className="absolute top-3 right-4 text-7xl font-black select-none"
+                style={{ color: 'rgba(255,255,255,0.03)', lineHeight: 1 }}
+              >
+                {step.number}
+              </div>
+
+              <div className="icon-badge mb-5">
+                <step.Icon size={20} />
+              </div>
+
+              <span className="section-label mb-2">{step.number}</span>
+
+              <h3 className="text-lg font-bold mb-2" style={{ color: '#F2F0F5' }}>
+                {step.title}
+              </h3>
+              <p className="text-sm leading-relaxed" style={{ color: '#8B8996' }}>
+                {step.description}
+              </p>
             </div>
           ))}
         </div>
