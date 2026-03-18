@@ -1,33 +1,178 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
 
 @import "tailwindcss";
 
+/* ─── CSS Variables ─────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:      #0D0D12;
+  --surface: #15151D;
+  --card:    #1C1C28;
+  --accent:  #A594F9;
+  --rose:    #E8A09A;
+  --text:    #F2F0F5;
+  --muted:   #8B8996;
+  --dim:     #4A4856;
+  --border:  rgba(255, 255, 255, 0.07);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ─── Base ──────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-html {
-  scroll-behavior: smooth;
+h1, h2, h3, h4, h5 { font-family: 'Syne', sans-serif; }
+
+/* ─── Orb Keyframes ─────────────── */
+@keyframes float-a {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(40px, -30px); }
+  66%       { transform: translate(-20px, 20px); }
+}
+@keyframes float-b {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(-30px, 25px); }
+  66%       { transform: translate(25px, -20px); }
 }
 
+/* ─── Entry Animations ──────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up   { animation: fade-up 0.65s ease-out 0.0s both; }
+.fade-up-1 { animation: fade-up 0.65s ease-out 0.1s both; }
+.fade-up-2 { animation: fade-up 0.65s ease-out 0.2s both; }
+.fade-up-3 { animation: fade-up 0.65s ease-out 0.35s both; }
+.fade-up-4 { animation: fade-up 0.65s ease-out 0.5s both; }
+
+/* ─── Buttons ───────────────────── */
+.btn-primary {
+  background-color: var(--accent);
+  color: #0D0D12;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 999px;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 28px rgba(165, 148, 249, 0.45);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  color: var(--accent);
+  border: 1px solid rgba(165, 148, 249, 0.35);
+  background-color: rgba(165, 148, 249, 0.06);
+  font-weight: 500;
+  padding: 14px 32px;
+  border-radius: 999px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-ghost:hover {
+  background-color: rgba(165, 148, 249, 0.14);
+  transform: translateY(-1px);
+}
+.btn-sm { padding: 8px 20px; font-size: 14px; }
+
+/* ─── Cards ─────────────────────── */
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(165, 148, 249, 0.3);
+  box-shadow: 0 8px 40px rgba(165, 148, 249, 0.08);
+}
+
+/* ─── Orbs ──────────────────────── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+.orb-lavender {
+  background: radial-gradient(circle, rgba(165, 148, 249, 0.15) 0%, transparent 70%);
+  animation: float-a 18s ease-in-out infinite;
+}
+.orb-rose {
+  background: radial-gradient(circle, rgba(232, 160, 154, 0.12) 0%, transparent 70%);
+  animation: float-b 13s ease-in-out infinite;
+}
+
+/* ─── Nav Link ──────────────────── */
+.nav-link {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.nav-link:hover { color: var(--accent); }
+
+/* ─── Section Helpers ───────────── */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: var(--text);
+}
+.section-body { color: var(--muted); line-height: 1.7; }
+
+/* ─── Gradient Text ─────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #A594F9 0%, #E8A09A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Icon Badge ────────────────── */
+.icon-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: rgba(165, 148, 249, 0.1);
+  border: 1px solid rgba(165, 148, 249, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+/* ─── Progress Bar ──────────────── */
+.progress-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #A594F9, #E8A09A);
+}
+
+/* ─── Scrollbar ─────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--card); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--dim); }
