@@ -1,83 +1,119 @@
 import Link from 'next/link';
+import { Check } from 'lucide-react';
 
 const benefits = [
-  { icon: '🎯', text: 'Tailored to the Moroccan educational context' },
-  { icon: '🤖', text: 'AI-powered explanations and recommendations' },
-  { icon: '⚡', text: 'Get clear results in minutes, not days' },
-  { icon: '🔓', text: 'Free to use — no hidden fees' },
-  { icon: '📱', text: 'Works on any device, anytime' },
-  { icon: '🔒', text: 'Your data is private and secure' },
+  'Built for the Moroccan educational context',
+  'AI-powered explanations and recommendations',
+  'Get clear results in minutes, not days',
+  'Completely free — no hidden fees',
+  'Works on any device, anytime',
+  'Your data stays private and secure',
 ];
 
-const progressSteps = [
-  { label: 'Take the test', done: true, progress: '100%' },
-  { label: 'Get ranked domains', done: true, progress: '75%' },
-  { label: 'Build your roadmap', done: false, progress: '40%' },
-  { label: 'Track your progress', done: false, progress: '10%' },
+const mockDomains = [
+  { name: 'Design & UX',    percent: 82 },
+  { name: 'Software Dev',   percent: 71 },
+  { name: 'Business',       percent: 58 },
+  { name: 'Marketing',      percent: 44 },
 ];
 
 export default function WhyTriQi() {
   return (
-    <section id="why-triqi" className="py-24 px-4 bg-white">
+    <section id="why-triqi" className="py-28 px-4" style={{ backgroundColor: '#0D0D12' }}>
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* Left Side: Text + Benefits */}
+          {/* Left */}
           <div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Why Choose{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">
-                TriQi?
-              </span>
+            <span className="section-label mb-3">Why TriQi</span>
+            <h2
+              className="text-4xl md:text-5xl font-bold mb-6"
+              style={{ letterSpacing: '-0.02em', color: '#F2F0F5' }}
+            >
+              A clearer path,{' '}
+              <span className="gradient-text">backed by data</span>
             </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg leading-relaxed mb-10" style={{ color: '#8B8996' }}>
               Most students in Morocco choose their path based on family pressure or chance.
               TriQi gives you a data-driven, personal answer — so you move forward with confidence.
             </p>
 
             <ul className="space-y-4 mb-10">
-              {benefits.map((benefit, index) => (
-                <li key={index} className="flex items-center gap-3">
-                  <span className="text-2xl">{benefit.icon}</span>
-                  <span className="text-gray-700 font-medium">{benefit.text}</span>
+              {benefits.map((benefit) => (
+                <li key={benefit} className="flex items-center gap-3">
+                  <div
+                    className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(165,148,249,0.15)' }}
+                  >
+                    <Check size={11} color="#A594F9" strokeWidth={3} />
+                  </div>
+                  <span className="text-sm" style={{ color: '#8B8996' }}>{benefit}</span>
                 </li>
               ))}
             </ul>
 
-            <Link
-              href="/register"
-              className="inline-block bg-indigo-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition-all hover:shadow-lg hover:shadow-indigo-200"
-            >
+            <Link href="/auth/register" className="btn-primary">
               Start for Free →
             </Link>
           </div>
 
-          {/* Right Side: Visual Card */}
-          <div className="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-8">Your journey starts here</h3>
+          {/* Right: Mock Result Card */}
+          <div
+            className="rounded-2xl p-6"
+            style={{
+              background: 'linear-gradient(135deg, #1C1C28 0%, #21202F 100%)',
+              border: '1px solid rgba(255,255,255,0.08)',
+            }}
+          >
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <p className="text-xs uppercase tracking-widest mb-1" style={{ color: '#4A4856' }}>
+                  Your Results
+                </p>
+                <h3 className="text-lg font-bold" style={{ color: '#F2F0F5' }}>
+                  Domain Compatibility
+                </h3>
+              </div>
+              <div
+                className="px-3 py-1 rounded-full text-xs font-semibold"
+                style={{ backgroundColor: 'rgba(165,148,249,0.15)', color: '#A594F9' }}
+              >
+                Top Match ✦
+              </div>
+            </div>
 
             <div className="space-y-5">
-              {progressSteps.map((step, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 ${
-                      step.done ? 'bg-white text-indigo-600' : 'bg-white/20 text-white'
-                    }`}
-                  >
-                    {step.done ? '✓' : i + 1}
+              {mockDomains.map((domain, i) => (
+                <div key={domain.name}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium" style={{ color: '#F2F0F5' }}>
+                      {domain.name}
+                    </span>
+                    <span
+                      className="text-sm font-bold"
+                      style={{ color: i === 0 ? '#A594F9' : '#4A4856' }}
+                    >
+                      {domain.percent}%
+                    </span>
                   </div>
-                  <div className="flex-1 bg-white/20 rounded-full h-2 overflow-hidden">
-                    <div className="bg-white h-2 rounded-full" style={{ width: step.progress }} />
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${domain.percent}%`, opacity: i === 0 ? 1 : 0.35 }}
+                    />
                   </div>
-                  <span className="text-sm text-white/80 min-w-max">{step.label}</span>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-white/20">
-              <p className="text-white/70 text-sm">
-                Join students who found their path with TriQi 🧭
-              </p>
+            <div
+              className="mt-6 pt-5 flex items-center justify-between"
+              style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+            >
+              <p className="text-xs" style={{ color: '#4A4856' }}>Based on 24 test answers</p>
+              <span className="text-xs font-medium" style={{ color: '#A594F9' }}>
+                View full report →
+              </span>
             </div>
           </div>
 
