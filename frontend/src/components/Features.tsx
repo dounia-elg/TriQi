@@ -1,67 +1,65 @@
+import { Brain, TrendingUp, Map, Sparkles, Building2, CheckCircle } from 'lucide-react';
+
 const features = [
   {
-    icon: '🧠',
+    Icon: Brain,
     title: 'Smart Orientation Test',
-    description: 'Structured questions covering interests, personality, and abilities with a weighted scoring system.',
-    bg: 'bg-indigo-50',
+    description: 'Weighted questions covering interests, personality, and abilities. Built for depth, not just surface answers.',
   },
   {
-    icon: '📈',
+    Icon: TrendingUp,
     title: 'Intelligent Scoring Engine',
-    description: 'Our algorithm calculates your compatibility with each domain and ranks them from best to worst match.',
-    bg: 'bg-violet-50',
+    description: 'Our algorithm ranks every domain by compatibility score — from your strongest to weakest match.',
   },
   {
-    icon: '🗺️',
+    Icon: Map,
     title: 'Personalized Roadmap',
-    description: 'A detailed week-by-week action plan for 3 or 6 months with tasks tailored to your profile.',
-    bg: 'bg-purple-50',
+    description: 'A week-by-week action plan built around your top domain. 3-month or 6-month tracks.',
   },
   {
-    icon: '📚',
+    Icon: Sparkles,
     title: 'AI-Powered Explanations',
-    description: 'Understand why you matched a domain with clear explanations based on your score intensity.',
-    bg: 'bg-blue-50',
+    description: 'Understand why you matched a domain with detailed explanations based on your score intensity.',
   },
   {
-    icon: '🏫',
+    Icon: Building2,
     title: 'Institution Recommendations',
-    description: 'Find schools and programs that match your domain, filtered by country and city.',
-    bg: 'bg-teal-50',
+    description: 'Find schools and programs that match your domain, filterable by country and city.',
   },
   {
-    icon: '✅',
+    Icon: CheckCircle,
     title: 'Progress Tracking',
-    description: 'Mark tasks as done and watch your progress percentage grow as you move toward your goal.',
-    bg: 'bg-emerald-50',
+    description: 'Mark tasks as done. Watch your progress grow. Stay accountable to your own journey.',
   },
 ];
 
 export default function Features() {
   return (
-    <section id="features" className="py-24 px-4 bg-gray-50">
+    <section id="features" className="py-28 px-4" style={{ backgroundColor: '#15151D' }}>
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Main Features</h2>
-          <p className="text-lg text-gray-600 max-w-xl mx-auto">
+          <span className="section-label mb-3">What We Offer</span>
+          <h2 className="section-title text-4xl md:text-5xl mb-4">Main Features</h2>
+          <p className="section-body max-w-lg mx-auto text-lg">
             Everything you need to find and follow your academic and professional path.
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 ${feature.bg}`}>
-                {feature.icon}
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((feature) => (
+            <div key={feature.title} className="card p-6">
+              <div className="icon-badge mb-5">
+                <feature.Icon size={20} />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+              <h3 className="text-lg font-bold mb-2" style={{ color: '#F2F0F5' }}>
+                {feature.title}
+              </h3>
+              <p className="text-sm leading-relaxed" style={{ color: '#8B8996' }}>
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>
