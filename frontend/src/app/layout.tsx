@@ -1,24 +1,17 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/contexts/AuthContext';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export const metadata: Metadata = {
-  title: 'TriQi — Your Orientation Platform',
+  title: 'TriQi — Know Yourself. Choose Wisely.',
   description:
-    'Discover your academic and professional path with TriQi',
+    'TriQi helps young Moroccans discover their academic and professional path through a smart orientation test, personalized roadmaps, and AI-powered guidance.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
