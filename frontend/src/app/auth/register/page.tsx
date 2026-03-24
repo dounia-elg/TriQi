@@ -67,7 +67,7 @@ export default function RegisterPage() {
           muted
           loop
           playsInline
-          src="/hero.mp4"
+          src="/register.mp4"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#6a4c93]/80 via-[#6a4c93]/40 to-transparent" />
         
