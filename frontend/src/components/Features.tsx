@@ -38,15 +38,15 @@ export default function Features() {
     <section id="features" className="py-28 px-4 relative overflow-hidden" style={{ backgroundColor: 'var(--bg)' }}>
       {/* Decorative floating elements (using subtle colors) */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-gradient-to-r from-[#ff595e]/5 to-[#ffca3a]/5 blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-gradient-to-r from-[#6a4c93]/5 to-[#8ac926]/5 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-linear-to-r from-[#ff595e]/5 to-[#ffca3a]/5 blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-linear-to-r from-[#6a4c93]/5 to-[#8ac926]/5 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
-            <Sparkles size={16} className="text-[var(--secondary)]" />
-            <span className="text-xs font-semibold text-[var(--primary)] uppercase tracking-wider">What We Offer</span>
+            <Sparkles size={16} className="text-(--secondary)" />
+            <span className="text-xs font-semibold text-(--primary) uppercase tracking-wider">What We Offer</span>
           </div>
           <h2 className="section-title text-4xl md:text-5xl font-bold mb-4">
             Everything You Need
@@ -91,9 +91,9 @@ export default function Features() {
 
         {/* Optional CTA */}
         <div className="text-center mt-16">
-          <div className="inline-block bg-white/80 backdrop-blur-sm rounded-full px-6 py-2 shadow-sm border border-[var(--accent)]">
+          <div className="inline-block bg-white/80 backdrop-blur-sm rounded-full px-6 py-2 shadow-sm border border-(--accent)">
             <p className="text-sm font-medium text-gray-700">
-              ✨ Ready to start? <a href="/auth/register" className="text-[var(--secondary)] font-semibold hover:underline">Take the test now</a>
+              ✨ Ready to start? <a href="/auth/register" className="text-(--secondary) font-semibold hover:underline">Take the test now</a>
             </p>
           </div>
         </div>

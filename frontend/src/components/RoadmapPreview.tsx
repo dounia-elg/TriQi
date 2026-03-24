@@ -13,14 +13,14 @@ export default function RoadmapPreview() {
     <section className="py-28 px-4 relative overflow-hidden" style={{ backgroundColor: 'var(--primary)' }}>
       {/* Decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-gradient-to-r from-white/10 to-white/5 blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-gradient-to-r from-white/10 to-white/5 blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-linear-to-r from-white/10 to-white/5 blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-linear-to-r from-white/10 to-white/5 blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4 border border-white/20">
-            <Calendar size={16} className="text-[var(--accent)]" />
+            <Calendar size={16} className="text-(--accent)" />
             <span className="text-xs font-semibold text-white uppercase tracking-wider">Your Plan</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
@@ -36,10 +36,10 @@ export default function RoadmapPreview() {
         >
           <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
             <div>
-              <p className="text-xs uppercase tracking-widest mb-1 text-[var(--dim)]">
+              <p className="text-xs uppercase tracking-widest mb-1 text-(--dim)">
                 Sample Roadmap
               </p>
-              <h3 className="text-xl font-bold text-[var(--text)]">
+              <h3 className="text-xl font-bold text-(--text)">
                 6-Month Plan — Design & UX
               </h3>
             </div>
@@ -53,20 +53,20 @@ export default function RoadmapPreview() {
             {weeks.map((week) => (
               <div key={week.label} className="relative">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 mt-1">
+                  <div className="shrink-0 mt-1">
                     {week.completed ? (
-                      <CheckCircle size={20} className="text-[var(--secondary)]" />
+                      <CheckCircle size={20} className="text-(--secondary)" />
                     ) : (
-                      <Circle size={20} className="text-[var(--dim)]" />
+                      <Circle size={20} className="text-(--dim)" />
                     )}
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2 flex-wrap gap-1">
                       <div>
-                        <span className="text-xs font-bold uppercase tracking-wide text-[var(--primary)]">
+                        <span className="text-xs font-bold uppercase tracking-wide text-(--primary)">
                           {week.label}
                         </span>
-                        <p className="text-sm font-medium text-[var(--text)]">{week.task}</p>
+                        <p className="text-sm font-medium text-(--text)">{week.task}</p>
                       </div>
                       <span
                         className="text-sm font-bold"
@@ -91,7 +91,7 @@ export default function RoadmapPreview() {
             className="mt-8 pt-6 flex items-center justify-between flex-wrap gap-4"
             style={{ borderTop: '1px solid var(--border)' }}
           >
-            <p className="text-sm text-[var(--dim)] flex items-center gap-1">
+            <p className="text-sm text-(--dim) flex items-center gap-1">
               <Target size={14} />
               Generated from your orientation results
             </p>
