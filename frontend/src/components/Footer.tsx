@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { Sparkles, Heart } from 'lucide-react';
 
 const links = [
   { label: 'How it works', href: '#how-it-works' },
@@ -11,31 +14,58 @@ const links = [
 export default function Footer() {
   return (
     <footer
-      className="py-10 px-4"
+      className="py-16 px-6"
       style={{
-        backgroundColor: '#0A0A0F',
-        borderTop: '1px solid rgba(255,255,255,0.05)',
+        backgroundColor: '#fff4d7',
+        borderTop: '1px solid rgba(106, 76, 147, 0.1)',
       }}
     >
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-8">
 
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🧭</span>
-            <span className="text-base font-bold" style={{ color: '#F2F0F5' }}>TriQi</span>
+          {/* Logo & Brand */}
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <Link href="/" className="flex items-center gap-2 group">
+              <span className="text-2xl transition-transform group-hover:rotate-12">🧭</span>
+              <span 
+                className="text-xl font-bold tracking-tight text-[#2D2B35]"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+              >
+                TriQi
+              </span>
+            </Link>
+            <p className="text-sm text-[#6E6A7C] max-w-[200px] text-center md:text-left leading-relaxed">
+              Find your direction with confidence and joy.
+            </p>
           </div>
 
+          {/* Links */}
           <div className="flex items-center gap-6 flex-wrap justify-center">
             {links.map((link) => (
-              <Link key={link.href} href={link.href} className="nav-link text-sm">
+              <Link 
+                key={link.href} 
+                href={link.href} 
+                className="text-sm font-semibold text-[#6E6A7C] hover:text-[#6a4c93] transition-colors"
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#6a4c93')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = '#6E6A7C')}
+              >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          <p className="text-xs" style={{ color: '#4A4856' }}>
-            © 2026 <span style={{ color: '#8B8996' }}>TriQi</span> — Dounia Elgarrai
-          </p>
+          {/* Status/Copyright */}
+          <div className="flex flex-col items-center md:items-end gap-3">
+            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#ff595e]">
+              <Sparkles size={14} />
+              <span>Made with heart in Morocco</span>
+              <Heart size={14} />
+            </div>
+            <p className="text-xs text-[#A9A5B8]">
+              © 2026 <span className="font-bold text-[#6a4c93]">TriQi</span> — Dounia Elgarrai
+            </p>
+          </div>
+
         </div>
       </div>
     </footer>

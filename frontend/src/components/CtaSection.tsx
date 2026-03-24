@@ -3,35 +3,27 @@ import Link from 'next/link';
 export default function CtaSection() {
   return (
     <section
-      className="py-28 px-4 relative overflow-hidden"
-      style={{ backgroundColor: '#15151D' }}
+      className="py-28 px-4"
+      style={{
+        background:
+          'linear-gradient(135deg, #EDE8F8 0%, #FDF7F2 50%, #FDE8EE 100%)',
+      }}
     >
-      {/* Center orb */}
-      <div
-        className="orb orb-lavender"
-        style={{
-          width: 700,
-          height: 700,
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          opacity: 0.12,
-        }}
-      />
-
-      <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <span className="section-label mb-4">Ready?</span>
+      <div className="max-w-3xl mx-auto text-center">
+        <span className="section-label">Take the first step</span>
         <h2
-          className="text-4xl md:text-6xl font-bold mb-6"
-          style={{ letterSpacing: '-0.02em', color: '#F2F0F5' }}
+          className="text-4xl md:text-6xl font-bold mt-4 mb-6"
+          style={{ letterSpacing: '-0.02em', color: '#2D2B35' }}
         >
-          Your path is{' '}
-          <span className="gradient-text">waiting for you</span>
+          Ready to find{' '}
+          <span className="gradient-text">your path?</span>
         </h2>
-        <p className="text-lg mb-10" style={{ color: '#8B8996' }}>
-          Take the test today and get a personalized direction in minutes.
-          Free, always.
+        <p className="text-lg mb-10" style={{ color: '#6E6A7C' }}>
+          The test takes 10 minutes. The clarity lasts a lifetime.
+          <br />
+          Free. No pressure. Just you and your direction.
         </p>
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/auth/register" className="btn-primary text-base">
             Start for Free →
@@ -40,6 +32,10 @@ export default function CtaSection() {
             I have an account
           </Link>
         </div>
+
+        <p className="mt-6 text-sm" style={{ color: '#A9A5B8' }}>
+          No account required to explore
+        </p>
       </div>
     </section>
   );
