@@ -60,7 +60,7 @@ export default function RegisterPage() {
   return (
     <main className="relative min-h-screen flex overflow-hidden">
       {/* Left side - Video & Content */}
-      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-[#6a4c93]/20 to-[#ff595e]/20">
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-linear-to-br from-[#6a4c93]/20 to-[#ff595e]/20">
         <video
           className="absolute inset-0 w-full h-full object-cover"
           autoPlay
@@ -69,7 +69,7 @@ export default function RegisterPage() {
           playsInline
           src="/register.mp4"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#6a4c93]/80 via-[#6a4c93]/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#6a4c93]/80 via-[#6a4c93]/40 to-transparent" />
         
         <div className="relative z-10 flex flex-col justify-between h-full p-12 text-white">
           <div>
@@ -121,15 +121,15 @@ export default function RegisterPage() {
           <div className="lg:hidden text-center mb-6">
             <Link href="/" className="inline-flex items-center gap-2 group">
               <span className="text-3xl transition-transform group-hover:rotate-12">🧭</span>
-              <span className="text-2xl font-bold text-[var(--text)]">TriQi</span>
+              <span className="text-2xl font-bold text-(--text)">TriQi</span>
             </Link>
           </div>
           
           {/* Compact card */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-[var(--border)]">
+          <div className="bg-white rounded-2xl p-6 shadow-lg border border-(--border)">
             <div className="text-center mb-6">
-              <h1 className="text-2xl font-bold text-[var(--text)] mb-1">Create an account</h1>
-              <p className="text-sm text-[var(--muted)]">Start your journey today</p>
+              <h1 className="text-2xl font-bold text-(--text) mb-1">Create an account</h1>
+              <p className="text-sm text-(--muted)">Start your journey today</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-3.5">
@@ -154,7 +154,7 @@ export default function RegisterPage() {
                   type="text"
                   placeholder="First name"
                   value={formData.firstName}
-                  className="w-full bg-[#faf8f4] border border-[var(--border)] focus:border-[var(--primary)] rounded-xl py-2 px-4 text-sm outline-none transition-all"
+                  className="w-full bg-[#faf8f4] border border-(--border) focus:border-(--primary) rounded-xl py-2 px-4 text-sm outline-none transition-all"
                   onChange={handleChange}
                 />
                 <input
@@ -163,7 +163,7 @@ export default function RegisterPage() {
                   type="text"
                   placeholder="Last name"
                   value={formData.lastName}
-                  className="w-full bg-[#faf8f4] border border-[var(--border)] focus:border-[var(--primary)] rounded-xl py-2 px-4 text-sm outline-none transition-all"
+                  className="w-full bg-[#faf8f4] border border-(--border) focus:border-(--primary) rounded-xl py-2 px-4 text-sm outline-none transition-all"
                   onChange={handleChange}
                 />
               </div>
@@ -174,7 +174,7 @@ export default function RegisterPage() {
                 type="email"
                 placeholder="Email address"
                 value={formData.email}
-                className="w-full bg-[#faf8f4] border border-[var(--border)] focus:border-[var(--primary)] rounded-xl py-2 px-4 text-sm outline-none transition-all"
+                className="w-full bg-[#faf8f4] border border-(--border) focus:border-(--primary) rounded-xl py-2 px-4 text-sm outline-none transition-all"
                 onChange={handleChange}
               />
 
@@ -184,7 +184,7 @@ export default function RegisterPage() {
                 type="password"
                 placeholder="Password (min 6 characters)"
                 value={formData.password}
-                className="w-full bg-[#faf8f4] border border-[var(--border)] focus:border-[var(--primary)] rounded-xl py-2 px-4 text-sm outline-none transition-all"
+                className="w-full bg-[#faf8f4] border border-(--border) focus:border-(--primary) rounded-xl py-2 px-4 text-sm outline-none transition-all"
                 onChange={handleChange}
               />
 
@@ -194,7 +194,7 @@ export default function RegisterPage() {
                   name="educationLevel"
                   value={formData.educationLevel}
                   onChange={handleChange}
-                  className="w-full bg-[#faf8f4] border border-[var(--border)] focus:border-[var(--primary)] rounded-xl py-2 px-4 text-sm outline-none transition-all appearance-none"
+                  className="w-full bg-[#faf8f4] border border-(--border) focus:border-(--primary) rounded-xl py-2 px-4 text-sm outline-none transition-all appearance-none"
                 >
                   <option value="" disabled>Select Education Level</option>
                   <option value="Colledge">Collège (9ème AF)</option>
@@ -212,7 +212,7 @@ export default function RegisterPage() {
                   name="ageRange"
                   value={formData.ageRange}
                   onChange={handleChange}
-                  className="w-full bg-[#faf8f4] border border-[var(--border)] focus:border-[var(--primary)] rounded-xl py-2 px-4 text-sm outline-none transition-all appearance-none"
+                  className="w-full bg-[#faf8f4] border border-(--border) focus:border-(--primary) rounded-xl py-2 px-4 text-sm outline-none transition-all appearance-none"
                 >
                   <option value="" disabled>Select Age Range</option>
                   <option value="13-15">13-15</option>
@@ -225,7 +225,7 @@ export default function RegisterPage() {
 
               <button
                 disabled={isLoading}
-                className="w-full bg-[var(--primary)] text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all hover:bg-[#ff595e] active:scale-[0.98] disabled:opacity-70 mt-2"
+                className="w-full bg-(--primary) text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all hover:bg-[#ff595e] active:scale-[0.98] disabled:opacity-70 mt-2"
               >
                 {isLoading ? (
                   <Loader2 size={18} className="animate-spin" />
@@ -237,17 +237,17 @@ export default function RegisterPage() {
               </button>
             </form>
 
-            <div className="mt-6 text-center pt-4 border-t border-[var(--border)]">
-              <p className="text-sm text-[var(--muted)]">
+            <div className="mt-6 text-center pt-4 border-t border-(--border)">
+              <p className="text-sm text-(--muted)">
                 Already have an account?{' '}
-                <Link href="/auth/login" className="text-[var(--primary)] font-semibold hover:underline">
+                <Link href="/auth/login" className="text-(--primary) font-semibold hover:underline">
                   Log in
                 </Link>
               </p>
             </div>
           </div>
 
-          <p className="text-center text-xs text-[var(--dim)] mt-6">
+          <p className="text-center text-xs text-(--dim) mt-6">
             By creating an account, you agree to our Terms of Service and Privacy Policy.
           </p>
         </div>
