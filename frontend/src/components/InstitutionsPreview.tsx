@@ -1,141 +1,136 @@
 import Link from 'next/link';
-import { MapPin, GraduationCap, ExternalLink, TrendingUp } from 'lucide-react';
+import { MapPin, GraduationCap, ArrowRight } from 'lucide-react';
 
 const institutions = [
   {
     name: 'ENSIAS',
     city: 'Rabat',
-    country: 'Morocco',
     type: 'Public · Selective',
     domain: 'Computer Science',
     match: 92,
     emoji: '🏛️',
-    color: '#ff595e',
+    accent: '#E8724A',
   },
   {
     name: 'ESCA École de Management',
     city: 'Casablanca',
-    country: 'Morocco',
     type: 'Private · Business',
     domain: 'Business & Finance',
     match: 85,
     emoji: '🎓',
-    color: '#ffca3a',
+    accent: '#F0B860',
   },
   {
     name: 'Institut National des Beaux-Arts',
-    city: 'Tétouan',
-    country: 'Morocco',
+    city: 'Tetouan',
     type: 'Public · Creative',
     domain: 'Design & Arts',
     match: 78,
     emoji: '🎨',
-    color: '#8ac926',
+    accent: '#7DAA92',
   },
 ];
 
 export default function InstitutionsPreview() {
   return (
-    <section className="py-28 px-4 relative overflow-hidden" style={{ backgroundColor: 'var(--surface)' }}>
-      {/* Decorative floating elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-0 w-72 h-72 rounded-full bg-gradient-to-r from-[#ff595e]/5 to-[#ffca3a]/5 blur-3xl animate-float" />
-        <div className="absolute bottom-1/3 right-0 w-80 h-80 rounded-full bg-gradient-to-r from-[#6a4c93]/5 to-[#8ac926]/5 blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-      </div>
+    <section className="py-28 px-4" style={{ backgroundColor: '#FBF5EC' }}>
+      <div className="max-w-6xl mx-auto">
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
-            <GraduationCap size={16} className="text-[var(--secondary)]" />
-            <span className="text-xs font-semibold text-[var(--primary)] uppercase tracking-wider">Find Your Place</span>
+        {/* Header — left-aligned for editorial feel */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+          <div className="max-w-lg">
+            <span className="section-label">Find your place</span>
+            <h2
+              className="section-title mt-4 mb-3"
+              style={{ fontSize: 'clamp(30px, 4vw, 44px)', letterSpacing: '-0.02em' }}
+            >
+              Institutions<br />
+              <em style={{ fontStyle: 'italic', color: 'var(--primary)' }}>recommended for you.</em>
+            </h2>
+            <p className="section-body text-base">
+              TriQi matches your profile to schools and programs that suit you best — in Morocco and abroad.
+            </p>
           </div>
-          <h2 className="section-title text-4xl md:text-5xl font-bold mb-4">
-            Recommended Institutions
-          </h2>
-          <p className="section-body max-w-lg mx-auto text-lg">
-            TriQi matches your profile to schools and programs that suit you best.
-          </p>
+          <Link href="/auth/register" className="btn-ghost btn-sm whitespace-nowrap self-start md:self-auto">
+            See all →
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {institutions.map((inst) => (
-            <div
-              key={inst.name}
-              className="card group p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
-            >
-              {/* Match percentage as circular progress */}
-              <div className="absolute top-4 right-4 flex items-center justify-center">
-                <div className="relative w-12 h-12">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle
-                      cx="24"
-                      cy="24"
-                      r="20"
-                      stroke="rgba(0,0,0,0.05)"
-                      strokeWidth="3"
-                      fill="none"
-                    />
-                    <circle
-                      cx="24"
-                      cy="24"
-                      r="20"
-                      stroke={inst.color}
-                      strokeWidth="3"
-                      fill="none"
-                      strokeDasharray={`${2 * Math.PI * 20}`}
-                      strokeDashoffset={`${2 * Math.PI * 20 * (1 - inst.match / 100)}`}
-                      strokeLinecap="round"
-                      className="transition-all duration-500"
-                    />
-                  </svg>
-                  <span className="absolute inset-0 flex items-center justify-center text-xs font-bold" style={{ color: inst.color }}>
-                    {inst.match}%
-                  </span>
-                </div>
+            <div key={inst.name} className="card group p-6 relative overflow-hidden">
+
+              {/* Match badge */}
+              <div
+                className="absolute top-5 right-5 w-11 h-11 relative"
+              >
+                <svg className="w-full h-full -rotate-90" viewBox="0 0 44 44">
+                  <circle cx="22" cy="22" r="18" stroke="rgba(0,0,0,0.06)" strokeWidth="3" fill="none" />
+                  <circle
+                    cx="22" cy="22" r="18"
+                    stroke={inst.accent}
+                    strokeWidth="3"
+                    fill="none"
+                    strokeDasharray={`${2 * Math.PI * 18}`}
+                    strokeDashoffset={`${2 * Math.PI * 18 * (1 - inst.match / 100)}`}
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <span
+                  className="absolute inset-0 flex items-center justify-center text-[10px] font-bold"
+                  style={{ color: inst.accent }}
+                >
+                  {inst.match}%
+                </span>
               </div>
 
-              <div className="flex items-start gap-3 mb-4">
+              {/* Icon + name */}
+              <div className="flex items-start gap-3 mb-5 pr-12">
                 <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
-                  style={{ backgroundColor: `${inst.color}1A` }}
+                  className="w-11 h-11 rounded-2xl flex items-center justify-center text-xl shrink-0"
+                  style={{ background: `${inst.accent}18` }}
                 >
                   {inst.emoji}
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[var(--text)]">{inst.name}</h3>
-                  <div className="flex items-center gap-1 text-[var(--dim)] text-xs mt-1">
-                    <MapPin size={12} />
-                    <span>{inst.city}, {inst.country}</span>
+                  <h3 className="font-bold text-sm leading-tight" style={{ fontFamily: 'Lora, serif', color: 'var(--ink)' }}>
+                    {inst.name}
+                  </h3>
+                  <div className="flex items-center gap-1 mt-1" style={{ color: 'var(--dim)', fontSize: '12px' }}>
+                    <MapPin size={11} />
+                    <span>{inst.city}</span>
                   </div>
                 </div>
               </div>
 
+              {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-5">
-                <span className="tag-primary text-xs flex items-center gap-1">
-                  <GraduationCap size={11} />
-                  {inst.domain}
+                <span className="tag tag-primary text-xs flex items-center gap-1">
+                  <GraduationCap size={10} /> {inst.domain}
                 </span>
-                <span className="tag-secondary text-xs">{inst.type}</span>
+                <span
+                  className="tag text-xs"
+                  style={{ background: `${inst.accent}12`, color: inst.accent }}
+                >
+                  {inst.type}
+                </span>
               </div>
 
-              <div className="border-t border-[var(--border)] pt-4 mt-auto">
+              {/* CTA */}
+              <div className="border-t pt-4" style={{ borderColor: 'var(--border)' }}>
                 <Link
                   href="/auth/register"
-                  className="flex items-center gap-1 text-sm font-semibold group-hover:gap-2 transition-all duration-300"
+                  className="inline-flex items-center gap-1 text-sm font-semibold group-hover:gap-2 transition-all"
                   style={{ color: 'var(--primary)' }}
                 >
-                  View Institution <ExternalLink size={13} className="group-hover:translate-x-1 transition-transform" />
+                  View institution → <ArrowRight size={13} />
                 </Link>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="text-center">
-          <Link href="/auth/register" className="btn-ghost flex items-center gap-1 justify-center mx-auto w-fit">
-            See All Institutions <TrendingUp size={16} />
-          </Link>
-        </div>
       </div>
     </section>
   );
