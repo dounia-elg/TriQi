@@ -5,8 +5,8 @@ import Features            from '@/components/Features';
 import RoadmapPreview      from '@/components/RoadmapPreview';
 import InstitutionsPreview from '@/components/InstitutionsPreview';
 import WhyTriQi            from '@/components/WhyTriQi';
-import CtaSection          from '@/components/CtaSection';
-import Footer              from '@/components/Footer';
+import { CtaSection } from '@/components/CtaSection';
+import { Footer }     from '@/components/Footer';
 
 export default function HomePage() {
   return (

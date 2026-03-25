@@ -3,100 +3,113 @@ import { Brain, TrendingUp, Map, Sparkles, Building2, CheckCircle } from 'lucide
 const features = [
   {
     Icon: Brain,
-    title: 'Smart Orientation Test',
-    description: 'Weighted questions covering interests, personality and abilities. Designed for depth.',
+    tag: '01',
+    title: 'Smart Test',
+    description: 'Weighted questions covering your interests, personality, and abilities. Designed for depth.',
+    color: '#E8724A',
   },
   {
     Icon: TrendingUp,
-    title: 'Intelligent Scoring',
-    description: 'Our algorithm ranks every domain by compatibility — from strongest to weakest match.',
+    tag: '02',
+    title: 'Domain Scoring',
+    description: 'Our algorithm ranks every domain by compatibility with your profile — from strongest to weakest.',
+    color: '#F0B860',
   },
   {
     Icon: Map,
-    title: 'Personalized Roadmap',
-    description: 'A week-by-week action plan for 3 or 6 months, built around your top domain.',
+    tag: '03',
+    title: 'Custom Roadmap',
+    description: 'A week-by-week action plan for 3 or 6 months, built around your primary domain.',
+    color: '#7DAA92',
   },
   {
     Icon: Sparkles,
-    title: 'AI-Powered Explanations',
-    description: 'Understand why you matched a domain with smart, readable explanations.',
+    tag: '04',
+    title: 'Clear Explanations',
+    description: 'Understand why you match a domain with readable and personalized explanations.',
+    color: '#E8724A',
   },
   {
     Icon: Building2,
-    title: 'Institution Recommendations',
-    description: 'Find schools and programs that match your domain, filterable by country.',
+    tag: '05',
+    title: 'Recommended Institutions',
+    description: 'Find schools and programs that match your domain, filterable by location.',
+    color: '#F0B860',
   },
   {
     Icon: CheckCircle,
+    tag: '06',
     title: 'Progress Tracking',
-    description: 'Mark tasks done. Watch your progress grow. Stay on track with your plan.',
+    description: 'Tick your tasks. Watch your progress grow. Stay on track every week.',
+    color: '#7DAA92',
   },
 ];
 
 export default function Features() {
   return (
-    <section id="features" className="py-28 px-4 relative overflow-hidden" style={{ backgroundColor: 'var(--bg)' }}>
-      {/* Decorative floating elements (using subtle colors) */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-gradient-to-r from-[#ff595e]/5 to-[#ffca3a]/5 blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-gradient-to-r from-[#6a4c93]/5 to-[#8ac926]/5 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
-      </div>
+    <section id="features" className="py-28 px-4" style={{ backgroundColor: 'var(--bg)' }}>
+      <div className="max-w-6xl mx-auto">
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
-            <Sparkles size={16} className="text-[var(--secondary)]" />
-            <span className="text-xs font-semibold text-[var(--primary)] uppercase tracking-wider">What We Offer</span>
-          </div>
-          <h2 className="section-title text-4xl md:text-5xl font-bold mb-4">
-            Everything You Need
+        {/* Header */}
+        <div className="max-w-xl mb-16">
+          <span className="section-label">What we offer</span>
+          <h2
+            className="section-title mt-4 mb-4"
+            style={{ fontSize: 'clamp(32px, 4vw, 48px)', letterSpacing: '-0.02em' }}
+          >
+            Everything you need<br />
+            <em style={{ fontStyle: 'italic', color: 'var(--primary)' }}>to move forward.</em>
           </h2>
-          <p className="section-body max-w-lg mx-auto text-lg">
-            All the tools to find and follow your academic and professional path.
+          <p className="section-body text-base">
+            Tools designed for young Moroccans to choose their path with clarity and confidence.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => (
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {features.map((f) => (
             <div
-              key={feature.title}
-              className="card group p-7 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              key={f.tag}
+              className="card group p-7 relative overflow-hidden"
+              style={{ borderRadius: '20px' }}
             >
-              {/* Decorative background number */}
+              {/* Large faded number */}
               <div
-                className="absolute top-3 right-4 text-7xl font-black select-none opacity-5 group-hover:opacity-10 transition-opacity"
-                style={{ color: 'var(--primary)' }}
+                className="absolute -top-2 -right-1 text-8xl font-black select-none opacity-[0.04] group-hover:opacity-[0.07] transition-opacity"
+                style={{ fontFamily: 'Lora, serif', color: f.color }}
               >
-                {String(index + 1).padStart(2, '0')}
+                {f.tag}
               </div>
 
+              {/* Icon */}
               <div
-                className="icon-badge mb-5 transition-all duration-300 group-hover:scale-110"
-                style={{
-                  backgroundColor: 'rgba(106, 76, 147, 0.1)', // using primary with opacity
-                  color: 'var(--primary)',
-                }}
+                className="w-11 h-11 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
+                style={{ background: `${f.color}18`, color: f.color }}
               >
-                <feature.Icon size={22} />
+                <f.Icon size={20} />
               </div>
-              <h3 className="text-lg font-bold mb-2 text-gray-800">
-                {feature.title}
+
+              <h3
+                className="mb-2 font-bold"
+                style={{ fontFamily: 'Lora, serif', fontSize: '17px', color: 'var(--ink)' }}
+              >
+                {f.title}
               </h3>
-              <p className="text-sm leading-relaxed text-gray-600">
-                {feature.description}
-              </p>
+              <p className="section-body text-sm">{f.description}</p>
             </div>
           ))}
         </div>
 
-        {/* Optional CTA */}
-        <div className="text-center mt-16">
-          <div className="inline-block bg-white/80 backdrop-blur-sm rounded-full px-6 py-2 shadow-sm border border-[var(--accent)]">
-            <p className="text-sm font-medium text-gray-700">
-              ✨ Ready to start? <a href="/auth/register" className="text-[var(--secondary)] font-semibold hover:underline">Take the test now</a>
-            </p>
-          </div>
+        {/* Bottom CTA */}
+        <div className="mt-14 text-center">
+          <a
+            href="/auth/register"
+            className="btn-primary btn-sm inline-flex items-center gap-2"
+          >
+            Take the test now →
+          </a>
         </div>
+
       </div>
     </section>
   );

@@ -1,15 +1,15 @@
-import { ClipboardList, BarChart2, Map, Sparkles } from 'lucide-react';
 import Image from 'next/image';
+import { ClipboardList, BarChart2, Map } from 'lucide-react';
 
 const steps = [
   {
     number: '01',
     Icon: ClipboardList,
     title: 'Take the Test',
-    description: 'Answer thoughtful questions about your interests, personality, and natural abilities. It takes about 10 minutes.',
+    description: 'Answer thoughtful questions about your interests, personality, and natural abilities. Takes about 10 minutes — honesty is key.',
     image: '/images/step1.jpg',
-    imageAlt: 'Student taking a test',
-    color: '#ff595e', // vibrant_coral
+    alt: 'Student taking orientation test',
+    accent: '#E8724A',
   },
   {
     number: '02',
@@ -17,8 +17,8 @@ const steps = [
     title: 'Discover Your Domains',
     description: 'Our engine ranks every domain by compatibility with your profile. You get clear, ranked results and explanations.',
     image: '/images/step2.jpg',
-    imageAlt: 'Dashboard showing results',
-    color: '#ffca3a', // golden_pollen
+    alt: 'Dashboard showing results',
+    accent: '#F0B860',
   },
   {
     number: '03',
@@ -26,91 +26,103 @@ const steps = [
     title: 'Follow Your Roadmap',
     description: 'Get a personalized 3 or 6-month action plan with weekly tasks — tailored to your top domain.',
     image: '/images/step3.jpg',
-    imageAlt: 'Roadmap illustration',
-    color: '#8ac926', // yellow_green
+    alt: 'Roadmap illustration',
+    accent: '#7DAA92',
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-28 px-4 relative" style={{ backgroundColor: '#ffddde' }}>
-      {/* Decorative pattern */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-          <circle cx="200" cy="200" r="80" fill="#ff595e" />
-          <circle cx="800" cy="500" r="120" fill="#ffca3a" />
-          <circle cx="500" cy="800" r="100" fill="#8ac926" />
-        </svg>
-      </div>
+    <section id="how-it-works" className="py-28 px-4 relative" style={{ backgroundColor: 'var(--sand)' }}>
+
+      {/* Subtle dot pattern */}
+      <div
+        className="absolute inset-0 opacity-30 pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(232,114,74,0.15) 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+        }}
+      />
 
       <div className="max-w-6xl mx-auto relative z-10">
+
+        {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
-            <Sparkles size={16} className="text-[#ff595e]" />
-            <span className="text-xs font-semibold text-[#6a4c93] uppercase tracking-wider">Your Journey</span>
-          </div>
-          <h2 className="section-title text-4xl md:text-5xl font-bold mb-4">
-            How It Works
+          <span className="section-label">Your progress</span>
+          <h2
+            className="section-title mt-4 mb-4"
+            style={{ fontSize: 'clamp(32px, 4vw, 48px)', letterSpacing: '-0.02em' }}
+          >
+            From confusion<br />
+            <em style={{ fontStyle: 'italic', color: 'var(--primary)' }}>to clarity.</em>
           </h2>
-          <p className="section-body max-w-lg mx-auto text-lg">
-            Three simple steps from confusion to clarity.
+          <p className="section-body max-w-md mx-auto text-base">
+            Three simple steps to find your direction and start moving forward with confidence.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.map((step) => (
-            <div
-              key={step.number}
-              className="card group hover:shadow-xl transition-all duration-300 overflow-hidden"
-            >
+            <div key={step.number} className="card group overflow-hidden">
+
               {/* Image */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-52 overflow-hidden">
                 <Image
                   src={step.image}
-                  alt={step.imageAlt}
+                  alt={step.alt}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-              </div>
-
-              <div className="p-6 relative">
-                {/* Decorative number background */}
+                {/* Warm tint overlay */}
                 <div
-                  className="absolute top-4 right-4 text-8xl font-black select-none opacity-10 group-hover:opacity-20 transition-opacity"
-                  style={{ color: step.color }}
+                  className="absolute inset-0"
+                  style={{ background: `linear-gradient(to top, ${step.accent}55 0%, transparent 60%)` }}
+                />
+                {/* Step number badge */}
+                <div
+                  className="absolute bottom-4 left-5 text-5xl font-black select-none"
+                  style={{ fontFamily: 'Lora, serif', color: 'rgba(251,245,236,0.9)', lineHeight: 1 }}
                 >
                   {step.number}
                 </div>
+              </div>
 
+              {/* Content */}
+              <div className="p-6">
                 <div
-                  className="icon-badge mb-4"
-                  style={{ backgroundColor: `${step.color}1A`, color: step.color }}
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                  style={{ background: `${step.accent}18`, color: step.accent }}
                 >
-                  <step.Icon size={22} />
+                  <step.Icon size={18} />
                 </div>
-
-                <h3 className="text-xl font-bold mb-2 text-[#2D2B35]">
+                <h3
+                  className="mb-2 font-bold"
+                  style={{ fontFamily: 'Lora, serif', fontSize: '18px', color: 'var(--ink)' }}
+                >
                   {step.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-gray-600">
-                  {step.description}
-                </p>
+                <p className="section-body text-sm">{step.description}</p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Additional call to action */}
-        <div className="mt-16 text-center">
-          <div className="inline-block bg-white/80 backdrop-blur-sm rounded-2xl p-6 max-w-md mx-auto shadow-md border border-[#ffca3a]">
-            <p className="text-sm font-semibold text-[#ff595e] mb-2">✨ Start Today</p>
-            <p className="text-gray-600">
-              Join hundreds of students who found their path with TriQi. Your future self will thank you.
+        {/* Bottom note */}
+        <div className="mt-14 flex justify-center">
+          <div
+            className="inline-flex items-center gap-3 rounded-2xl px-6 py-4"
+            style={{ background: '#FBF5EC', border: '1px solid rgba(232,114,74,0.2)' }}
+          >
+            <span style={{ fontSize: '20px' }}>✨</span>
+            <p className="section-body text-sm">
+              <strong style={{ color: 'var(--primary)' }}>Start today.</strong>{' '}
+              Hundreds of students have already found their path with TriQi. Your future self will thank you.
             </p>
           </div>
         </div>
+
       </div>
     </section>
   );
