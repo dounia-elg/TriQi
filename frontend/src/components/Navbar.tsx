@@ -2,18 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogOut, User as UserIcon } from 'lucide-react';
 import Logo from '@/components/Logo';
+import { useAuth } from '@/contexts/AuthContext';
 
 const navLinks = [
-  { label: 'How it works', href: '#how-it-works', dot: '#C2E0F4' },
-  { label: 'Features',     href: '#features',     dot: '#F9CEDE' },
-  { label: 'Why TriQi?',   href: '#why-triqi',    dot: '#C8EACC' },
+  { label: 'How it works', href: '/#how-it-works', dot: '#C2E0F4' },
+  { label: 'Features',     href: '/#features',     dot: '#F9CEDE' },
+  { label: 'Why TriQi?',   href: '/#why-triqi',    dot: '#C8EACC' },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen]     = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -36,14 +38,13 @@ export default function Navbar() {
 
           <Logo light={!scrolled} size="md" />
 
+          {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map(({ label, href, dot }) => (
               <Link
                 key={href} href={href}
                 className="group flex items-center gap-1.5 text-sm font-medium transition-colors duration-200"
                 style={{ color: scrolled ? 'var(--muted)' : 'rgba(255,255,255,0.88)' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--primary)')}
-                onMouseLeave={e => (e.currentTarget.style.color = scrolled ? 'var(--muted)' : 'rgba(255,255,255,0.88)')}
               >
                 <span className="w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: dot }} />
                 {label}
@@ -52,22 +53,44 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="/auth/login"
-              className="text-sm font-semibold transition-colors duration-200"
-              style={{ color: scrolled ? 'var(--primary)' : 'rgba(255,255,255,0.92)' }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--primary)')}
-              onMouseLeave={e => (e.currentTarget.style.color = scrolled ? 'var(--primary)' : 'rgba(255,255,255,0.92)')}
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/auth/register"
-              className="btn-primary btn-sm"
-              style={!scrolled ? { background: 'rgba(255,255,255,0.92)', color: 'var(--primary)' } : {}}
-            >
-              Get started
-            </Link>
+            {isAuthenticated ? (
+              <div className="flex items-center gap-5">
+                <Link
+                  href="/profile"
+                  className="flex items-center gap-2 text-sm font-semibold transition-colors"
+                  style={{ color: scrolled ? 'var(--ink)' : '#fff' }}
+                >
+                  <div className="w-8 h-8 rounded-full bg-[var(--blue)] flex items-center justify-center text-[var(--primary)] text-xs font-bold uppercase">
+                    {user?.firstName?.[0]}
+                  </div>
+                  {user?.firstName}
+                </Link>
+                <button
+                  onClick={logout}
+                  className="p-2 text-slate-400 hover:text-red-400 transition-colors"
+                  title="Logout"
+                >
+                  <LogOut size={18} />
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="text-sm font-semibold transition-colors"
+                  style={{ color: scrolled ? 'var(--primary)' : 'rgba(255,255,255,0.92)' }}
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/auth/register"
+                  className="btn-primary btn-sm"
+                  style={!scrolled ? { background: 'rgba(255,255,255,0.92)', color: 'var(--primary)' } : {}}
+                >
+                  Get started
+                </Link>
+              </>
+            )}
           </div>
 
           <button
@@ -91,19 +114,28 @@ export default function Navbar() {
             {navLinks.map(({ label, href, dot }) => (
               <Link
                 key={href} href={href}
-                className="flex items-center gap-3 text-2xl font-bold hover:text-[var(--primary)] transition-colors"
-                style={{ fontFamily: 'Lora, serif', color: 'var(--ink)' }}
+                className="flex items-center gap-3 text-2xl font-bold font-serif"
+                style={{ color: 'var(--ink)' }}
                 onClick={() => setIsOpen(false)}
               >
                 <span className="w-3 h-3 rounded-full" style={{ background: dot }} />
                 {label}
               </Link>
             ))}
+            {isAuthenticated && (
+              <Link href="/profile" className="text-2xl font-bold font-serif" style={{ color: 'var(--primary)' }} onClick={() => setIsOpen(false)}>My Profile</Link>
+            )}
           </div>
 
           <div className="p-8 flex flex-col gap-3 border-t" style={{ borderColor: 'var(--border)' }}>
-            <Link href="/auth/login" className="btn-ghost w-full text-center" onClick={() => setIsOpen(false)}>Sign in</Link>
-            <Link href="/auth/register" className="btn-primary w-full text-center" onClick={() => setIsOpen(false)}>Get started</Link>
+            {isAuthenticated ? (
+               <button onClick={() => { logout(); setIsOpen(false); }} className="btn-primary w-full text-center">Logout</button>
+            ) : (
+              <>
+                <Link href="/auth/login" className="btn-ghost w-full text-center" onClick={() => setIsOpen(false)}>Sign in</Link>
+                <Link href="/auth/register" className="btn-primary w-full text-center" onClick={() => setIsOpen(false)}>Get started</Link>
+              </>
+            )}
           </div>
         </div>
       )}

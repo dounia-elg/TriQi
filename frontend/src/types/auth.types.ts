@@ -1,8 +1,13 @@
 export interface User {
   id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   role: 'USER' | 'ADMIN';
+  educationLevel?: string;
+  ageRange?: string;
+  city?: string;
+  goal?: string;
 }
 
 export interface AuthContextType {
