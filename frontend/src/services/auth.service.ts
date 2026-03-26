@@ -11,4 +11,9 @@ export const authService = {
     const { data } = await api.post('/auth/register', userData);
     return data;
   },
+
+  async getProfile(userId: string) {
+    const { data } = await api.get(`/auth/profile/${userId}`);
+    return data;
+  },
 };
