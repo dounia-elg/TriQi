@@ -58,9 +58,9 @@ export default function HeroSection() {
         {/* Stats — each in its pastel color */}
         <div className="fade-up-4 mt-16 flex justify-center gap-12 flex-wrap">
           {[
-            { value: '50+',    label: 'Career Domains', color: 'var(--blue)'  },
-            { value: '10 min', label: 'Test Duration',  color: 'var(--pink)'  },
-            { value: '100%',   label: 'Free Forever',   color: 'var(--green)' },
+            { value: '50+', label: 'Career Domains', color: 'var(--blue)' },
+            { value: '10 min', label: 'Test Duration', color: 'var(--pink)' },
+            { value: '100%', label: 'Free Forever', color: 'var(--green)' },
           ].map(s => (
             <div key={s.label} className="text-center">
               <p style={{ fontFamily: 'Lora, serif', fontSize: '26px', fontWeight: 700, color: s.color }}>{s.value}</p>

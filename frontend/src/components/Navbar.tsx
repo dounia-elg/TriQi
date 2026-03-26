@@ -8,12 +8,12 @@ import { useAuth } from '@/contexts/AuthContext';
 
 const navLinks = [
   { label: 'How it works', href: '/#how-it-works', dot: '#C2E0F4' },
-  { label: 'Features',     href: '/#features',     dot: '#F9CEDE' },
-  { label: 'Why TriQi?',   href: '/#why-triqi',    dot: '#C8EACC' },
+  { label: 'Features', href: '/#features', dot: '#F9CEDE' },
+  { label: 'Why TriQi?', href: '/#why-triqi', dot: '#C8EACC' },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen]     = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
 
@@ -26,9 +26,8 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-          scrolled ? 'py-3 backdrop-blur-md border-b shadow-sm' : 'py-5 bg-transparent'
-        }`}
+        className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'py-3 backdrop-blur-md border-b shadow-sm' : 'py-5 bg-transparent'
+          }`}
         style={{
           backgroundColor: scrolled ? 'rgba(240,248,255,0.92)' : 'transparent',
           borderColor: scrolled ? 'rgba(91,170,220,0.12)' : 'transparent',
@@ -129,7 +128,7 @@ export default function Navbar() {
 
           <div className="p-8 flex flex-col gap-3 border-t" style={{ borderColor: 'var(--border)' }}>
             {isAuthenticated ? (
-               <button onClick={() => { logout(); setIsOpen(false); }} className="btn-primary w-full text-center">Logout</button>
+              <button onClick={() => { logout(); setIsOpen(false); }} className="btn-primary w-full text-center">Logout</button>
             ) : (
               <>
                 <Link href="/auth/login" className="btn-ghost w-full text-center" onClick={() => setIsOpen(false)}>Sign in</Link>

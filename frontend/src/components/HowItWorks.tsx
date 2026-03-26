@@ -2,9 +2,9 @@ import Image from 'next/image';
 import { ClipboardList, BarChart2, Map } from 'lucide-react';
 
 const steps = [
-  { number: '01', Icon: ClipboardList, title: 'Take the Test',         description: 'Answer thoughtful questions about your interests, personality, and natural abilities. About 10 minutes — honesty gets the best results.', image: '/images/step1.jpg', alt: 'Student taking the orientation test',  bg: 'var(--tint-blue)',   border: 'var(--blue)',  icon: 'var(--primary)',   numColor: 'rgba(194,224,244,0.95)' },
-  { number: '02', Icon: BarChart2,     title: 'Discover Your Domains',  description: 'Our engine ranks every domain by how well it fits your profile. Clear, ranked results with explanations — not just a raw score.',              image: '/images/step2.jpg', alt: 'Dashboard showing orientation results', bg: 'var(--tint-pink)',   border: 'var(--pink)',  icon: 'var(--secondary)', numColor: 'rgba(249,206,222,0.95)' },
-  { number: '03', Icon: Map,           title: 'Follow Your Roadmap',    description: 'Get a personalized 3 or 6-month action plan with weekly tasks — designed around your top domain and ready to follow from day one.',               image: '/images/step3.jpg', alt: 'Roadmap illustration',                  bg: 'var(--tint-green)',  border: 'var(--green)', icon: 'var(--accent)',    numColor: 'rgba(200,234,204,0.95)' },
+  { number: '01', Icon: ClipboardList, title: 'Take the Test', description: 'Answer thoughtful questions about your interests, personality, and natural abilities. About 10 minutes — honesty gets the best results.', image: '/images/step1.jpg', alt: 'Student taking the orientation test', bg: 'var(--tint-blue)', border: 'var(--blue)', icon: 'var(--primary)', numColor: 'rgba(194,224,244,0.95)' },
+  { number: '02', Icon: BarChart2, title: 'Discover Your Domains', description: 'Our engine ranks every domain by how well it fits your profile. Clear, ranked results with explanations — not just a raw score.', image: '/images/step2.jpg', alt: 'Dashboard showing orientation results', bg: 'var(--tint-pink)', border: 'var(--pink)', icon: 'var(--secondary)', numColor: 'rgba(249,206,222,0.95)' },
+  { number: '03', Icon: Map, title: 'Follow Your Roadmap', description: 'Get a personalized 3 or 6-month action plan with weekly tasks — designed around your top domain and ready to follow from day one.', image: '/images/step3.jpg', alt: 'Roadmap illustration', bg: 'var(--tint-green)', border: 'var(--green)', icon: 'var(--accent)', numColor: 'rgba(200,234,204,0.95)' },
 ];
 
 export default function HowItWorks() {

@@ -4,45 +4,60 @@
 /* ─── Palette ─────────────────────────────────── */
 :root {
   /* Backgrounds */
-  --bg:      #F0F8FF;   /* lightest sky — page base */
+  --bg: #F0F8FF;
+  /* lightest sky — page base */
   --surface: #FFFFFF;
-  --card:    #FFFFFF;
-  --sand:    #FEF6FB;   /* pinkish off-white for alternating sections */
+  --card: #FFFFFF;
+  --sand: #FEF6FB;
+  /* pinkish off-white for alternating sections */
 
   /* Core pastel brand colors */
-  --primary:   #5BAADC;   /* sky blue — CTA, links, active */
-  --secondary: #F472A8;   /* blossom pink — highlights, accents */
-  --accent:    #6DC47A;   /* mint green — success, tags */
-  --yellow:    #F9C74F;   /* lemon — warmth, stars, badges */
-  --lavender:  #B8A9E0;   /* soft purple — extra variety */
+  --primary: #1d638f;
+  /* sky blue — CTA, links, active */
+  --secondary: #d84f88;
+  /* blossom pink — highlights, accents */
+  --accent: #4aae59;
+  /* mint green — success, tags */
+  --yellow: #f8c243;
+  /* lemon — warmth, stars, badges */
+  --lavender: #9d8ad2;
+  /* soft purple — extra variety */
 
   /* Pastel swatches (used as bg tints on cards/sections) */
-  --blue:   #C2E0F4;
-  --pink:   #F9CEDE;
-  --green:  #C8EACC;
-  --lemon:  #FDE8A0;
-  --purple: #DDD4F0;
+  --blue: #8cc1e4;
+  --pink: #db81a2;
+  --green: #79d384;
+  --lemon: #e6ca71;
+  --purple: #bcabe0;
 
   /* Pastel tints (lightest, section backgrounds) */
-  --tint-blue:   #EBF6FD;
-  --tint-pink:   #FEF0F5;
-  --tint-green:  #EFF9F0;
-  --tint-yellow: #FEFAE8;
-  --tint-purple: #F4F1FC;
+  --tint-blue: #ebf6fd;
+  --tint-pink: #fef0f5;
+  --tint-green: #eff9f0;
+  --tint-yellow: #fefae8;
+  --tint-purple: #f4f1fc;
 
   /* Typography */
-  --ink:   #1E293B;   /* near-black, cool-toned for contrast */
-  --text:  #334155;
-  --muted: #64748B;
-  --dim:   #94A3B8;
+  --ink: #1E293B;
+  /* near-black, cool-toned for contrast */
+  --text: #2b394c;
+  --muted: #57687f;
+  --dim: #8a9ab1;
 
   /* Border */
   --border: rgba(91, 170, 220, 0.2);
-}
+} 
 
 /* ─── Base ──────────────────────── */
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background-color: var(--bg);
@@ -51,27 +66,63 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: 'Lora', serif;
   color: var(--ink);
 }
 
 /* ─── Entry Animations ──────────── */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.fade-up   { animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.0s  both; }
-.fade-up-1 { animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
-.fade-up-2 { animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s  both; }
-.fade-up-3 { animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.45s both; }
-.fade-up-4 { animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.6s  both; }
+
+.fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.0s both;
+}
+
+.fade-up-1 {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.fade-up-2 {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.fade-up-3 {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+.fade-up-4 {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
 
 @keyframes bounce-down {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
 }
-.bounce-down { animation: bounce-down 2.5s ease-in-out infinite; }
+
+.bounce-down {
+  animation: bounce-down 2.5s ease-in-out infinite;
+}
 
 /* ─── Buttons ───────────────────── */
 .btn-primary {
@@ -86,6 +137,7 @@ h1, h2, h3, h4, h5 {
   font-size: 15px;
   letter-spacing: 0.01em;
 }
+
 .btn-primary:hover {
   background-color: #3D96CC;
   box-shadow: 0 8px 32px rgba(91, 170, 220, 0.4);
@@ -104,12 +156,16 @@ h1, h2, h3, h4, h5 {
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
 }
+
 .btn-ghost:hover {
   background-color: rgba(91, 170, 220, 0.1);
   transform: translateY(-2px);
 }
 
-.btn-sm { padding: 10px 22px; font-size: 14px; }
+.btn-sm {
+  padding: 10px 22px;
+  font-size: 14px;
+}
 
 /* ─── Cards ─────────────────────── */
 .card {
@@ -119,6 +175,7 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 2px 16px rgba(91, 170, 220, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 32px rgba(91, 170, 220, 0.15);
@@ -127,16 +184,28 @@ h1, h2, h3, h4, h5 {
 /* ─── Section Helpers ───────────── */
 .section-label {
   display: inline-block;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--primary);
   background-color: var(--tint-blue);
   border-radius: 999px;
   padding: 4px 14px;
   font-family: 'DM Sans', sans-serif;
 }
-.section-title { font-family: 'Lora', serif; font-weight: 700; color: var(--ink); }
-.section-body  { color: var(--muted); line-height: 1.75; font-family: 'DM Sans', sans-serif; }
+
+.section-title {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.section-body {
+  color: var(--muted);
+  line-height: 1.75;
+  font-family: 'DM Sans', sans-serif;
+}
 
 /* ─── Gradient Text ─────────────── */
 .gradient-text {
@@ -147,32 +216,100 @@ h1, h2, h3, h4, h5 {
 }
 
 /* ─── Tags ──────────────────────── */
-.tag          { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; }
-.tag-blue     { background: var(--blue);   color: #1A6FA0; }
-.tag-pink     { background: var(--pink);   color: #B94B6E; }
-.tag-green    { background: var(--green);  color: #2D7A3A; }
-.tag-yellow   { background: var(--lemon);  color: #8A6A00; }
-.tag-purple   { background: var(--purple); color: #6A52AD; }
-.tag-primary  { background: var(--tint-blue); color: var(--primary); }
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.tag-blue {
+  background: var(--blue);
+  color: #1A6FA0;
+}
+
+.tag-pink {
+  background: var(--pink);
+  color: #B94B6E;
+}
+
+.tag-green {
+  background: var(--green);
+  color: #2D7A3A;
+}
+
+.tag-yellow {
+  background: var(--lemon);
+  color: #8A6A00;
+}
+
+.tag-purple {
+  background: var(--purple);
+  color: #6A52AD;
+}
+
+.tag-primary {
+  background: var(--tint-blue);
+  color: var(--primary);
+}
 
 /* ─── Icon Badge ────────────────── */
 .icon-badge {
-  width: 44px; height: 44px;
+  width: 44px;
+  height: 44px;
   border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--tint-blue);
   color: var(--primary);
 }
 
 /* ─── Progress Bar ──────────────── */
-.progress-bar  { height: 8px; border-radius: 999px; background: rgba(30,41,59,0.07); overflow: hidden; }
-.progress-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+.progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(30, 41, 59, 0.07);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
 
 /* ─── Scrollbar ─────────────────── */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--blue);
+  border-radius: 3px;
+}
 
 /* ─── Wave divider ──────────────── */
-.custom-shape-divider { position: absolute; bottom: 0; left: 0; width: 100%; overflow: hidden; line-height: 0; transform: rotate(180deg); }
-.custom-shape-divider svg { position: relative; display: block; width: calc(100% + 1.3px); height: 72px; }
+.custom-shape-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 72px;
+}

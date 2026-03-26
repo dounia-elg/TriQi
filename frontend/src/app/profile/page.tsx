@@ -118,9 +118,9 @@ export default function ProfilePage() {
 
                             {/* Stats Chips (Vertical on sidebar) */}
                             <div className="grid grid-cols-1 gap-3">
-                                <Chip label="Orientation score" value="85%" bg="var(--tint-green)" color="var(--accent)" />
-                                <Chip label="Tests taken" value={profile?.testCount ?? '0'} bg="var(--tint-pink)" color="var(--secondary)" />
-                                <Chip label="Personalized maps" value="1" bg="#fff" color="var(--primary)" />
+                                <Chip label="Orientation score" value={profile?.hasCompletedTest ? "85%" : "—"} bg="var(--tint-green)" color="var(--accent)" />
+                                <Chip label="Tests taken" value={profile?.hasCompletedTest ? "1" : "0"} bg="var(--tint-pink)" color="var(--secondary)" />
+                                <Chip label="Personalized maps" value={profile?.hasCompletedTest ? "1" : "0"} bg="#ffffff" color="var(--primary)" />
                             </div>
 
                         </aside>
@@ -130,24 +130,24 @@ export default function ProfilePage() {
 
                             {/* Journey Card (Full width above info) */}
                             <div
-                                className="rounded-4xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border shadow-sm"
+                                className="rounded-4xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-(--border) shadow-sm backdrop-blur-md bg-white/40"
                                 style={{ background: 'var(--tint-yellow)', borderColor: 'var(--lemon)' }}
                             >
                                 <div className="flex items-center gap-5">
                                     <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm" style={{ background: 'var(--lemon)' }}>
-                                        🧭
+                                        {profile?.hasCompletedTest ? '🎯' : '🧭'}
                                     </div>
                                     <div>
                                         <h3 style={{ fontFamily: 'Lora, serif', fontSize: '22px', fontWeight: 700, color: 'var(--ink)' }}>
-                                            Your orientation journey
+                                            {profile?.hasCompletedTest ? 'Your Results are Ready!' : 'Your orientation journey'}
                                         </h3>
                                         <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '15px', color: 'var(--muted)', marginTop: '4px' }}>
-                                            {profile?.testCount ? `You've completed the orientation. Keep refining your path!` : 'You haven\'t taken the orientation test yet. Ready to start?'}
+                                            {profile?.hasCompletedTest ? 'You have completed the orientation test. View your roadmap results below.' : 'You haven\'t taken the orientation test yet. Ready to start your journey?'}
                                         </p>
                                     </div>
                                 </div>
-                                <Link href="/test" className="btn-primary px-10 whitespace-nowrap">
-                                    {profile?.testCount ? 'Retake Test' : 'Start the Test →'}
+                                <Link href={profile?.hasCompletedTest ? '/results' : '/test'} className="btn-primary px-10 whitespace-nowrap">
+                                    {profile?.hasCompletedTest ? 'View Results' : 'Start the Test →'}
                                 </Link>
                             </div>
 

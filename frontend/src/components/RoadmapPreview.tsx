@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { CheckCircle, Circle, Target, Calendar } from 'lucide-react';
 
 const weeks = [
-  { label: 'Weeks 1–2', task: 'Discover your domain & explore possible paths',   percent: 100, done: true,  bar: 'var(--green)', text: 'var(--accent)'    },
-  { label: 'Weeks 3–4', task: 'Explore institutions and entry requirements',       percent: 72,  done: false, bar: 'var(--blue)',  text: 'var(--primary)'   },
-  { label: 'Weeks 5–6', task: 'Prepare your portfolio and application documents',  percent: 40,  done: false, bar: 'var(--pink)',  text: 'var(--secondary)' },
-  { label: 'Weeks 7–8', task: 'Apply and follow up on your applications',          percent: 10,  done: false, bar: 'var(--lemon)', text: '#A07A10'           },
+  { label: 'Weeks 1–2', task: 'Discover your domain & explore possible paths', percent: 100, done: true, bar: 'var(--green)', text: 'var(--accent)' },
+  { label: 'Weeks 3–4', task: 'Explore institutions and entry requirements', percent: 72, done: false, bar: 'var(--blue)', text: 'var(--primary)' },
+  { label: 'Weeks 5–6', task: 'Prepare your portfolio and application documents', percent: 40, done: false, bar: 'var(--pink)', text: 'var(--secondary)' },
+  { label: 'Weeks 7–8', task: 'Apply and follow up on your applications', percent: 10, done: false, bar: 'var(--lemon)', text: '#A07A10' },
 ];
 
 export default function RoadmapPreview() {
