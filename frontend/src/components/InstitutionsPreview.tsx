@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { MapPin, GraduationCap, ArrowRight } from 'lucide-react';
 
 const institutions = [
-  { name: 'ENSIAS',                           city: 'Rabat',      type: 'Public · Selective', domain: 'Computer Science',  match: 92, emoji: '🏛️', bg: 'var(--tint-blue)',   border: 'var(--blue)',  ring: 'var(--primary)',   tag: { bg: 'var(--blue)',  color: '#1A6FA0' } },
-  { name: 'ESCA École de Management',         city: 'Casablanca', type: 'Private · Business', domain: 'Business & Finance', match: 85, emoji: '🎓', bg: 'var(--tint-pink)',   border: 'var(--pink)',  ring: 'var(--secondary)', tag: { bg: 'var(--pink)',  color: '#B94B6E' } },
-  { name: 'Institut National des Beaux-Arts', city: 'Tétouan',    type: 'Public · Creative',  domain: 'Design & Arts',      match: 78, emoji: '🎨', bg: 'var(--tint-green)',  border: 'var(--green)', ring: 'var(--accent)',    tag: { bg: 'var(--green)', color: '#2D7A3A' } },
+  { name: 'ENSIAS', city: 'Rabat', type: 'Public · Selective', domain: 'Computer Science', match: 92, emoji: '🏛️', bg: 'var(--tint-blue)', border: 'var(--blue)', ring: 'var(--primary)', tag: { bg: 'var(--blue)', color: '#1A6FA0' } },
+  { name: 'ESCA École de Management', city: 'Casablanca', type: 'Private · Business', domain: 'Business & Finance', match: 85, emoji: '🎓', bg: 'var(--tint-pink)', border: 'var(--pink)', ring: 'var(--secondary)', tag: { bg: 'var(--pink)', color: '#B94B6E' } },
+  { name: 'Institut National des Beaux-Arts', city: 'Tétouan', type: 'Public · Creative', domain: 'Design & Arts', match: 78, emoji: '🎨', bg: 'var(--tint-green)', border: 'var(--green)', ring: 'var(--accent)', tag: { bg: 'var(--green)', color: '#2D7A3A' } },
 ];
 
 export default function InstitutionsPreview() {

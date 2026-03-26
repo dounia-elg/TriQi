@@ -1,12 +1,12 @@
 import { Brain, TrendingUp, Map, Sparkles, Building2, CheckCircle } from 'lucide-react';
 
 const features = [
-  { Icon: Brain,       tag: '01', title: 'Smart Orientation Test',    description: 'Weighted questions covering your interests, personality, and abilities — designed to go deep in just 10 minutes.', bg: 'var(--tint-blue)',   border: 'var(--blue)',   icon: 'var(--primary)',   num: 'var(--blue)'   },
-  { Icon: TrendingUp,  tag: '02', title: 'Intelligent Scoring',       description: 'Our algorithm ranks every career domain by compatibility — from your strongest match to the weakest.',             bg: 'var(--tint-pink)',   border: 'var(--pink)',   icon: 'var(--secondary)', num: 'var(--pink)'   },
-  { Icon: Map,         tag: '03', title: 'Personalized Roadmap',      description: 'A week-by-week action plan for 3 or 6 months, built specifically around your top domain.',                         bg: 'var(--tint-green)',  border: 'var(--green)',  icon: 'var(--accent)',    num: 'var(--green)'  },
-  { Icon: Sparkles,    tag: '04', title: 'Clear Explanations',        description: 'Understand exactly why you matched a domain with readable, personalized explanations — not just a raw score.',     bg: 'var(--tint-yellow)', border: 'var(--lemon)',  icon: '#A07A10',          num: 'var(--lemon)'  },
-  { Icon: Building2,   tag: '05', title: 'Institution Recommendations',description: 'Find schools and programs that fit your domain, filterable by country — Morocco and beyond.',                      bg: 'var(--tint-blue)',   border: 'var(--blue)',   icon: 'var(--primary)',   num: 'var(--blue)'   },
-  { Icon: CheckCircle, tag: '06', title: 'Progress Tracking',         description: 'Check off tasks. Watch your progress grow. Stay on your plan, week after week.',                                    bg: 'var(--tint-green)',  border: 'var(--green)',  icon: 'var(--accent)',    num: 'var(--green)'  },
+  { Icon: Brain, tag: '01', title: 'Smart Orientation Test', description: 'Weighted questions covering your interests, personality, and abilities — designed to go deep in just 10 minutes.', bg: 'var(--tint-blue)', border: 'var(--blue)', icon: 'var(--primary)', num: 'var(--blue)' },
+  { Icon: TrendingUp, tag: '02', title: 'Intelligent Scoring', description: 'Our algorithm ranks every career domain by compatibility — from your strongest match to the weakest.', bg: 'var(--tint-pink)', border: 'var(--pink)', icon: 'var(--secondary)', num: 'var(--pink)' },
+  { Icon: Map, tag: '03', title: 'Personalized Roadmap', description: 'A week-by-week action plan for 3 or 6 months, built specifically around your top domain.', bg: 'var(--tint-green)', border: 'var(--green)', icon: 'var(--accent)', num: 'var(--green)' },
+  { Icon: Sparkles, tag: '04', title: 'Clear Explanations', description: 'Understand exactly why you matched a domain with readable, personalized explanations — not just a raw score.', bg: 'var(--tint-yellow)', border: 'var(--lemon)', icon: '#A07A10', num: 'var(--lemon)' },
+  { Icon: Building2, tag: '05', title: 'Institution Recommendations', description: 'Find schools and programs that fit your domain, filterable by country — Morocco and beyond.', bg: 'var(--tint-blue)', border: 'var(--blue)', icon: 'var(--primary)', num: 'var(--blue)' },
+  { Icon: CheckCircle, tag: '06', title: 'Progress Tracking', description: 'Check off tasks. Watch your progress grow. Stay on your plan, week after week.', bg: 'var(--tint-green)', border: 'var(--green)', icon: 'var(--accent)', num: 'var(--green)' },
 ];
 
 export default function Features() {
