@@ -3,18 +3,41 @@
 
 /* ─── Palette ─────────────────────────────────── */
 :root {
-  --bg:        #FBF5EC;   /* warm cream */
-  --surface:   #FFFFFF;
-  --card:      #FFFFFF;
-  --primary:   #E8724A;   /* terracotta */
-  --secondary: #7DAA92;   /* sage */
-  --accent:    #F0B860;   /* amber */
-  --ink:       #2C2416;   /* deep warm brown */
-  --text:      #3D3020;
-  --muted:     #7A6A55;
-  --dim:       #B8A898;
-  --border:    rgba(232, 114, 74, 0.15);
-  --sand:      #F5E6C8;
+  /* Backgrounds */
+  --bg:      #F0F8FF;   /* lightest sky — page base */
+  --surface: #FFFFFF;
+  --card:    #FFFFFF;
+  --sand:    #FEF6FB;   /* pinkish off-white for alternating sections */
+
+  /* Core pastel brand colors */
+  --primary:   #5BAADC;   /* sky blue — CTA, links, active */
+  --secondary: #F472A8;   /* blossom pink — highlights, accents */
+  --accent:    #6DC47A;   /* mint green — success, tags */
+  --yellow:    #F9C74F;   /* lemon — warmth, stars, badges */
+  --lavender:  #B8A9E0;   /* soft purple — extra variety */
+
+  /* Pastel swatches (used as bg tints on cards/sections) */
+  --blue:   #C2E0F4;
+  --pink:   #F9CEDE;
+  --green:  #C8EACC;
+  --lemon:  #FDE8A0;
+  --purple: #DDD4F0;
+
+  /* Pastel tints (lightest, section backgrounds) */
+  --tint-blue:   #EBF6FD;
+  --tint-pink:   #FEF0F5;
+  --tint-green:  #EFF9F0;
+  --tint-yellow: #FEFAE8;
+  --tint-purple: #F4F1FC;
+
+  /* Typography */
+  --ink:   #1E293B;   /* near-black, cool-toned for contrast */
+  --text:  #334155;
+  --muted: #64748B;
+  --dim:   #94A3B8;
+
+  /* Border */
+  --border: rgba(91, 170, 220, 0.2);
 }
 
 /* ─── Base ──────────────────────── */
@@ -53,7 +76,7 @@ h1, h2, h3, h4, h5 {
 /* ─── Buttons ───────────────────── */
 .btn-primary {
   background-color: var(--primary);
-  color: #FBF5EC;
+  color: #ffffff;
   font-weight: 600;
   padding: 14px 32px;
   border-radius: 999px;
@@ -64,14 +87,14 @@ h1, h2, h3, h4, h5 {
   letter-spacing: 0.01em;
 }
 .btn-primary:hover {
-  background-color: #D4623C;
-  box-shadow: 0 8px 32px rgba(232, 114, 74, 0.35);
+  background-color: #3D96CC;
+  box-shadow: 0 8px 32px rgba(91, 170, 220, 0.4);
   transform: translateY(-2px);
 }
 
 .btn-ghost {
   color: var(--primary);
-  border: 1.5px solid rgba(232, 114, 74, 0.35);
+  border: 1.5px solid rgba(91, 170, 220, 0.4);
   background-color: transparent;
   font-weight: 500;
   padding: 13px 30px;
@@ -82,7 +105,7 @@ h1, h2, h3, h4, h5 {
   font-size: 15px;
 }
 .btn-ghost:hover {
-  background-color: rgba(232, 114, 74, 0.08);
+  background-color: rgba(91, 170, 220, 0.1);
   transform: translateY(-2px);
 }
 
@@ -93,12 +116,12 @@ h1, h2, h3, h4, h5 {
   background-color: var(--card);
   border: 1px solid var(--border);
   border-radius: 20px;
-  box-shadow: 0 2px 16px rgba(44, 36, 22, 0.06);
+  box-shadow: 0 2px 16px rgba(91, 170, 220, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(44, 36, 22, 0.1);
+  box-shadow: 0 8px 32px rgba(91, 170, 220, 0.15);
 }
 
 /* ─── Section Helpers ───────────── */
@@ -107,53 +130,49 @@ h1, h2, h3, h4, h5 {
   font-size: 11px; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--primary);
-  background-color: rgba(232, 114, 74, 0.1);
+  background-color: var(--tint-blue);
   border-radius: 999px;
   padding: 4px 14px;
   font-family: 'DM Sans', sans-serif;
 }
-
-.section-title {
-  font-family: 'Lora', serif;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.section-body {
-  color: var(--muted);
-  line-height: 1.75;
-  font-family: 'DM Sans', sans-serif;
-}
+.section-title { font-family: 'Lora', serif; font-weight: 700; color: var(--ink); }
+.section-body  { color: var(--muted); line-height: 1.75; font-family: 'DM Sans', sans-serif; }
 
 /* ─── Gradient Text ─────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #E8724A 0%, #F0B860 100%);
+  background: linear-gradient(135deg, #5BAADC 0%, #F472A8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 /* ─── Tags ──────────────────────── */
-.tag         { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; }
-.tag-primary { background: rgba(232, 114, 74, 0.1); color: var(--primary); }
-.tag-sage    { background: rgba(125, 170, 146, 0.12); color: #5A8F74; }
-.tag-amber   { background: rgba(240, 184, 96, 0.15); color: #C48A20; }
+.tag          { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; }
+.tag-blue     { background: var(--blue);   color: #1A6FA0; }
+.tag-pink     { background: var(--pink);   color: #B94B6E; }
+.tag-green    { background: var(--green);  color: #2D7A3A; }
+.tag-yellow   { background: var(--lemon);  color: #8A6A00; }
+.tag-purple   { background: var(--purple); color: #6A52AD; }
+.tag-primary  { background: var(--tint-blue); color: var(--primary); }
+
+/* ─── Icon Badge ────────────────── */
+.icon-badge {
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--tint-blue);
+  color: var(--primary);
+}
+
+/* ─── Progress Bar ──────────────── */
+.progress-bar  { height: 8px; border-radius: 999px; background: rgba(30,41,59,0.07); overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
 
 /* ─── Scrollbar ─────────────────── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(232, 114, 74, 0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
 
 /* ─── Wave divider ──────────────── */
-.custom-shape-divider {
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 100%; overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
-}
-.custom-shape-divider svg {
-  position: relative; display: block;
-  width: calc(100% + 1.3px);
-  height: 72px;
-}
+.custom-shape-divider { position: absolute; bottom: 0; left: 0; width: 100%; overflow: hidden; line-height: 0; transform: rotate(180deg); }
+.custom-shape-divider svg { position: relative; display: block; width: calc(100% + 1.3px); height: 72px; }
