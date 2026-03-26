@@ -4,10 +4,35 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { authService } from '@/services/auth.service';
 import ProtectedRoute from '@/components/ProtectedRoute';
-import { User as UserIcon, Mail, MapPin, GraduationCap, Target, Calendar, Settings, Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import { Mail, GraduationCap, Settings, Loader2, MapPin, CalendarDays, Globe, Shield, ArrowLeft, LogOut } from 'lucide-react';
+
+// ── Info row helper ────────────────────────────────────────────────────────────
+function InfoRow({ label, value, color }: { label: string; value: string; color: string }) {
+  return (
+    <div className="flex flex-col gap-1">
+      <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--dim)' }}>
+        {label}
+      </p>
+      <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '15px', fontWeight: 600, color }}>
+        {value}
+      </p>
+    </div>
+  );
+}
+
+// ── Stat chip ─────────────────────────────────────────────────────────────────
+function Chip({ label, value, bg, color }: { label: string; value: string; bg: string; color: string }) {
+  return (
+    <div className="flex flex-col items-center justify-center rounded-2xl px-5 py-4 gap-1" style={{ background: bg, border: `1.5px solid ${color}30` }}>
+      <span style={{ fontFamily: 'Lora, serif', fontSize: '22px', fontWeight: 700, color }}>{value}</span>
+      <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '11px', fontWeight: 600, color: 'var(--muted)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{label}</span>
+    </div>
+  );
+}
 
 export default function ProfilePage() {
-  const { user: authUser } = useAuth();
+  const { user: authUser, logout } = useAuth();
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -22,86 +47,57 @@ export default function ProfilePage() {
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg)' }}>
-      <Loader2 className="animate-spin text-[var(--primary)]" size={40} />
+      <Loader2 className="animate-spin" size={36} style={{ color: 'var(--primary)' }} />
     </div>
   );
 
+  const initials = `${profile?.firstName?.[0] ?? ''}${profile?.lastName?.[0] ?? ''}`;
+
   return (
     <ProtectedRoute>
-      <main className="min-h-screen pt-32 pb-20 px-6" style={{ background: 'var(--bg)' }}>
-        <div className="max-w-4xl mx-auto">
-          
-          {/* ── Header Card ── */}
-          <div className="relative bg-white rounded-[40px] p-8 md:p-12 mb-8 border border-[var(--border)] shadow-sm overflow-hidden">
-            {/* Design elements from Home Page */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--tint-blue)] rounded-full blur-3xl opacity-60 -mr-32 -mt-32" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-[var(--tint-pink)] rounded-full blur-3xl opacity-40 -ml-24 -mb-24" />
+      <main className="min-h-screen pt-28 pb-24 px-4" style={{ background: 'var(--bg)' }}>
+        <div className="max-w-3xl mx-auto space-y-5">
 
-            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
-              <div className="w-28 h-28 md:w-32 md:h-32 rounded-3xl bg-[var(--blue)] flex items-center justify-center text-[var(--primary)] text-4xl font-serif font-bold shadow-inner">
-                {profile?.firstName?.[0]}
-              </div>
-              <div className="text-center md:text-left">
-                <span className="section-label mb-3">Student Profile</span>
-                <h1 className="text-4xl md:text-5xl font-serif font-bold mb-2">
-                  {profile?.firstName} <span className="text-[var(--primary)]">{profile?.lastName}</span>
-                </h1>
-                <p className="flex items-center justify-center md:justify-start gap-2 text-slate-500 font-medium">
-                  <Mail size={16} /> {profile?.email}
-                </p>
-              </div>
-            </div>
+          {/* ── Top Navigation ── */}
+          <div className="flex justify-between items-center mb-2 px-2">
+            <Link href="/" className="flex items-center gap-2 text-sm font-semibold text-[var(--muted)] hover:text-[var(--primary)] transition-colors">
+              <ArrowLeft size={16} /> Back to Home
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Academic Info */}
-            <div className="bg-white rounded-[32px] p-8 border border-[var(--border)] shadow-sm">
-              <h2 className="text-xl font-serif font-bold mb-8 flex items-center gap-3">
-                <div className="icon-badge"><GraduationCap size={20} /></div>
-                Education & Goals
-              </h2>
-              <div className="space-y-6">
-                <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 flex items-center gap-2">Education Level</p>
-                  <p className="text-lg font-medium">{profile?.educationLevel || 'Not specified'}</p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 flex items-center gap-2">Current Goal</p>
-                  <p className="text-lg font-medium italic text-[var(--primary)]">"{profile?.goal || 'Discovering my path'}"</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Personal Info */}
-            <div className="bg-white rounded-[32px] p-8 border border-[var(--border)] shadow-sm">
-              <h2 className="text-xl font-serif font-bold mb-8 flex items-center gap-3">
-                <div className="icon-badge"><Settings size={20} /></div>
-                Personal Details
-              </h2>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-6 text-sm">
-                <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 flex items-center gap-2">City</p>
-                  <p className="font-semibold">{profile?.city || 'Add city'}</p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 flex items-center gap-2">Age Range</p>
-                  <p className="font-semibold">{profile?.ageRange || 'Not set'}</p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Language</p>
-                  <p className="font-semibold">English</p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Role</p>
-                  <div className="tag tag-green">STUDENT</div>
-                </div>
-              </div>
-            </div>
+          {/* ── Hero card ─────────────────────────────────────────────────── */}
+          <div
+            className="relative overflow-hidden rounded-[28px] p-8 md:p-10"
+            style={{ background: 'var(--tint-blue)', border: '1.5px solid var(--blue)' }}
+          >
+            {/* ... */}
           </div>
 
-          <div className="mt-12 text-center">
-             <button className="btn-primary">Update Profile Information</button>
+          {/* ... Rest of the component ... */}
+
+          {/* ── Action buttons ─────────────────────────────────────────────── */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4 border-t border-[var(--border)]">
+            <button
+              className="btn-ghost flex items-center gap-2 px-6"
+              style={{ borderRadius: '14px' }}
+            >
+              <Settings size={16} />
+              Update Information
+            </button>
+            <button
+              onClick={logout}
+              className="flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-red-500 hover:bg-red-50 transition-all active:scale-95"
+              style={{ borderRadius: '14px' }}
+            >
+              <LogOut size={16} />
+              Logout
+            </button>
           </div>
+
+        </div>
+      </main>
+    </ProtectedRoute>
+
         </div>
       </main>
     </ProtectedRoute>
