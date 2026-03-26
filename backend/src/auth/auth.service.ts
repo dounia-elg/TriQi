@@ -10,7 +10,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-) {}
+  ) { }
 
   async register(dto: RegisterDto) {
     const existingUser = await this.usersService.findByEmail(dto.email);
@@ -33,18 +33,18 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
- 
+
     const isPasswordValid = await bcrypt.compare(dto.password, user.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    
+
     const payload = {
-      sub: user._id,    
+      sub: user._id,
       email: user.email,
       role: user.role,
     };
-    
+
     const accessToken = this.jwtService.sign(payload);
     return {
       accessToken,
@@ -54,7 +54,16 @@ export class AuthService {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
+        educationLevel: user.educationLevel,
+        ageRange: user.ageRange,
+        city: user.city,
+        goal: user.goal,
       },
     };
+  }
+
+  async getProfile(userId: string) {
+    const user = await this.usersService.findOne(userId);
+    return user;
   }
 }
