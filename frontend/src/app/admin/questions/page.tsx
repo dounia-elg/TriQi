@@ -155,7 +155,7 @@ export default function QuestionsManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between bg-white p-8 rounded-4xl border border-[var(--border)] shadow-sm">
+      <div className="flex items-center justify-between bg-white p-8 rounded-4xl border border-(--border) shadow-sm">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-[#fdf0f5] flex items-center justify-center text-[#db81a2]"><HelpCircle size={24} /></div>
           <div>
@@ -168,10 +168,10 @@ export default function QuestionsManagement() {
         </button>
       </div>
 
-      <div className="bg-white rounded-4xl border border-[var(--border)] shadow-sm overflow-hidden auto-x-scroll">
+      <div className="bg-white rounded-4xl border border-(--border) shadow-sm overflow-hidden auto-x-scroll">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-[#F0F8FF] text-[#8a9ab1] text-xs uppercase tracking-widest border-b border-[var(--border)]">
+            <tr className="bg-[#F0F8FF] text-[#8a9ab1] text-xs uppercase tracking-widest border-b border-(--border)">
               <th className="px-6 py-5 font-bold">Question Text</th>
               <th className="px-6 py-5 font-bold">Category</th>
               <th className="px-6 py-5 font-bold">Choices</th>
@@ -183,7 +183,7 @@ export default function QuestionsManagement() {
             {questions.length === 0 ? (
               <tr><td colSpan={5} className="px-6 py-10 text-center text-[#57687f]">No questions created yet.</td></tr>
             ) : questions.map((q) => (
-              <tr key={q._id} className="border-b border-[var(--border)] last:border-0 hover:bg-[#F9FAFB]">
+              <tr key={q._id} className="border-b border-(--border) last:border-0 hover:bg-[#F9FAFB]">
                 <td className="px-6 py-4 font-bold text-[#1E293B] max-w-sm truncate">{q.text}</td>
                 <td className="px-6 py-4 text-[#57687f] capitalize">{q.category}</td>
                 <td className="px-6 py-4">
@@ -207,7 +207,7 @@ export default function QuestionsManagement() {
       {isModalOpen && (
         <div className="fixed inset-0 bg-[#1E293B]/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-4xl w-full max-w-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
-            <div className="flex justify-between p-6 border-b border-[var(--border)] bg-[#F0F8FF]">
+            <div className="flex justify-between p-6 border-b border-(--border) bg-[#F0F8FF]">
               <h2 className="text-xl font-bold text-[#1E293B]">{editingId ? 'Edit Question' : 'New Question'}</h2>
               <button type="button" onClick={closeModal} className="text-[#8a9ab1] hover:text-[#db81a2]"><X size={20} /></button>
             </div>
@@ -235,7 +235,7 @@ export default function QuestionsManagement() {
                 </div>
               </div>
 
-              <div className="border-t border-[var(--border)] pt-6">
+              <div className="border-t border-(--border) pt-6">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="font-bold text-[#1E293B]">Choices & Scoring</h3>
                   <button type="button" onClick={addChoice} className="text-sm font-bold text-[#1d638f] flex items-center gap-1 hover:bg-[#ebf6fd] px-3 py-1.5 rounded-full"><Plus size={16}/> Add Choice</button>
@@ -243,7 +243,7 @@ export default function QuestionsManagement() {
                 
                 <div className="space-y-4">
                   {formData.choices.map((choice, cIdx) => (
-                    <div key={cIdx} className="p-5 rounded-2xl border border-[var(--border)] bg-[#F9FAFB]">
+                    <div key={cIdx} className="p-5 rounded-2xl border border-(--border) bg-[#F9FAFB]">
                       <div className="flex gap-4 mb-4">
                         <div className="flex-1">
                           <input required type="text" value={choice.text} onChange={e => updateChoiceText(cIdx, e.target.value)} placeholder={`Choice ${cIdx + 1} text (use Title | Description for icons)`} 
@@ -257,7 +257,7 @@ export default function QuestionsManagement() {
                         {choice.weights.map((w, wIdx) => (
                           <div key={wIdx} className="flex gap-2 items-center">
                             <Settings2 size={14} className="text-[#8a9ab1]"/>
-                            <select value={w.domainId} onChange={e => updateWeight(cIdx, wIdx, 'domainId', e.target.value)} className="rounded-lg py-1 px-2 border outline-none text-sm min-w-[150px]">
+                            <select value={w.domainId} onChange={e => updateWeight(cIdx, wIdx, 'domainId', e.target.value)} className="rounded-lg py-1 px-2 border outline-none text-sm min-w-37.5">
                               {domains.map(d => <option key={d._id} value={d._id}>{d.name}</option>)}
                             </select>
                             <span className="text-xs font-bold text-[#8a9ab1]">Weight:</span>
@@ -275,7 +275,7 @@ export default function QuestionsManagement() {
               </div>
             </form>
             
-            <div className="p-6 border-t border-[var(--border)] bg-[#F0F8FF] flex justify-end gap-3 rounded-b-4xl">
+            <div className="p-6 border-t border-(--border) bg-[#F0F8FF] flex justify-end gap-3 rounded-b-4xl">
               <button type="button" onClick={closeModal} className="px-6 py-3 rounded-full font-bold text-[#57687f]">Cancel</button>
               <button type="submit" onClick={handleSubmit} disabled={saving || formData.choices.length === 0} className="btn-primary flex items-center gap-2 disabled:opacity-50">
                 {saving ? <Loader2 className="animate-spin" size={18} /> : 'Save Question'}
