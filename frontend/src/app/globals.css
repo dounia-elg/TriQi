@@ -131,17 +131,30 @@ h5 {
   font-weight: 600;
   padding: 14px 32px;
   border-radius: 999px;
-  transition: box-shadow 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
-  display: inline-block;
+  transition: box-shadow 0.3s ease, transform 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
 }
 
-.btn-primary:hover {
+.btn-primary:not(:disabled):hover {
   background-color: #3D96CC;
   box-shadow: 0 8px 32px rgba(91, 170, 220, 0.4);
   transform: translateY(-2px);
+}
+
+.btn-primary:disabled {
+  background-color: var(--dim);
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .btn-ghost {
@@ -151,15 +164,25 @@ h5 {
   font-weight: 500;
   padding: 13px 30px;
   border-radius: 999px;
-  transition: background-color 0.25s ease, transform 0.2s ease;
-  display: inline-block;
+  transition: background-color 0.25s ease, transform 0.2s ease, opacity 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
+  cursor: pointer;
 }
 
-.btn-ghost:hover {
+.btn-ghost:not(:disabled):hover {
   background-color: rgba(91, 170, 220, 0.1);
   transform: translateY(-2px);
+}
+
+.btn-ghost:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btn-sm {

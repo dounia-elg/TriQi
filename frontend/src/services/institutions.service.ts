@@ -31,5 +31,11 @@ export const institutionsService = {
   async delete(id: string) {
     const { data } = await api.delete(`/institutions/${id}`);
     return data;
+  },
+
+  async suggest(domain: string, country: string) {
+    const { data } = await api.post('/institutions/admin/suggest', { domain, country });
+    return data; 
   }
+
 };

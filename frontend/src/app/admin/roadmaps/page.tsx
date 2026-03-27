@@ -115,7 +115,7 @@ export default function RoadmapTemplatesManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between bg-white p-8 rounded-4xl border border-[var(--border)] shadow-sm">
+      <div className="flex items-center justify-between bg-white p-8 rounded-4xl border border-(--border) shadow-sm">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-[#f4f2ff] flex items-center justify-center text-[#8B5CF6]"><FileText size={24} /></div>
           <div>
@@ -123,15 +123,15 @@ export default function RoadmapTemplatesManagement() {
             <p className="text-[#57687f] text-sm">Design structured learning paths mapped to student results.</p>
           </div>
         </div>
-        <button onClick={() => handleOpenModal()} className="btn-primary flex items-center gap-2 px-6 py-3 rounded-full font-bold shadow-md hover:scale-105 text-white">
+        <button onClick={() => handleOpenModal()} className="btn-primary flex items-center gap-2">
           <Plus size={18} /> Add Template
         </button>
       </div>
 
-      <div className="bg-white rounded-4xl border border-[var(--border)] shadow-sm overflow-hidden auto-x-scroll">
+      <div className="bg-white rounded-4xl border border-(--border) shadow-sm overflow-hidden auto-x-scroll">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-[#F0F8FF] text-[#8a9ab1] text-xs uppercase tracking-widest border-b border-[var(--border)]">
+            <tr className="bg-[#F0F8FF] text-[#8a9ab1] text-xs uppercase tracking-widest border-b border-(--border)">
               <th className="px-6 py-5 font-bold">Category Match</th>
               <th className="px-6 py-5 font-bold">Duration</th>
               <th className="px-6 py-5 font-bold">Total Weeks</th>
@@ -143,7 +143,7 @@ export default function RoadmapTemplatesManagement() {
             {templates.length === 0 ? (
               <tr><td colSpan={5} className="px-6 py-10 text-center text-[#57687f]">No templates created yet.</td></tr>
             ) : templates.map((t) => (
-              <tr key={t._id} className="border-b border-[var(--border)] last:border-0 hover:bg-[#F9FAFB]">
+              <tr key={t._id} className="border-b border-(--border) last:border-0 hover:bg-[#F9FAFB]">
                 <td className="px-6 py-4 font-bold text-[#1E293B]">{t.categoryName}</td>
                 <td className="px-6 py-4 text-[#57687f]">{t.durationMonths} Months</td>
                 <td className="px-6 py-4"><span className="px-3 py-1 bg-[#f4f2ff] text-[#8B5CF6] text-xs font-bold rounded-full">{t.weeks.length} Weeks</span></td>
@@ -165,7 +165,7 @@ export default function RoadmapTemplatesManagement() {
       {isModalOpen && (
         <div className="fixed inset-0 bg-[#1E293B]/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-4xl w-full max-w-4xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[95vh]">
-            <div className="flex justify-between p-6 border-b border-[var(--border)] bg-[#F0F8FF]">
+            <div className="flex justify-between p-6 border-b border-(--border) bg-[#F0F8FF]">
               <h2 className="text-xl font-bold text-[#1E293B]" style={{ fontFamily: 'Lora, serif' }}>{editingId ? 'Edit Template' : 'New Template'}</h2>
               <button type="button" onClick={closeModal} className="text-[#8a9ab1] hover:text-[#db81a2]"><X size={20} /></button>
             </div>
@@ -192,10 +192,10 @@ export default function RoadmapTemplatesManagement() {
                 </div>
               </div>
 
-              <div className="border-t border-[var(--border)] pt-6">
+              <div className="border-t border-(--border) pt-6">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="font-bold text-[#1E293B] text-lg" style={{ fontFamily: 'Lora, serif' }}>Roadmap Timeline</h3>
-                  <button type="button" onClick={addWeek} className="btn-primary text-white text-sm flex items-center gap-2 px-4 py-2 rounded-full font-bold shadow-md"><Plus size={16}/> Add Week</button>
+                  <button type="button" onClick={addWeek} className="btn-primary flex items-center gap-2 px-4 py-2"><Plus size={16}/> Add Week</button>
                 </div>
                 
                 <div className="space-y-6">
@@ -226,9 +226,9 @@ export default function RoadmapTemplatesManagement() {
               </div>
             </form>
             
-            <div className="p-6 border-t border-[var(--border)] bg-[#F0F8FF] flex justify-end gap-3 rounded-b-4xl">
+            <div className="p-6 border-t border-(--border) bg-[#F0F8FF] flex justify-end gap-3 rounded-b-4xl">
               <button type="button" onClick={closeModal} className="px-6 py-3 rounded-full font-bold text-[#57687f]">Cancel</button>
-              <button type="submit" onClick={handleSubmit} disabled={saving || formData.weeks.length === 0 || !formData.categoryId} className="btn-primary flex items-center gap-2 px-8 py-3 rounded-full font-bold shadow-md text-white disabled:opacity-50">
+              <button type="submit" onClick={handleSubmit} disabled={saving || formData.weeks.length === 0 || !formData.categoryId} className="btn-primary flex items-center gap-2 disabled:opacity-50">
                 {saving ? <Loader2 className="animate-spin" size={18} /> : 'Save Template'}
               </button>
             </div>
