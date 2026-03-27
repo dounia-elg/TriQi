@@ -138,7 +138,7 @@ export default function DomainsManagement() {
         </div>
         <button 
           onClick={() => handleOpenModal()}
-          className="btn-primary flex items-center gap-2 px-6 py-3 rounded-full font-bold shadow-md hover:scale-105 text-white"
+          className="btn-primary flex items-center gap-2"
         >
           <Plus size={18} /> Add Domain
         </button>
@@ -234,7 +234,7 @@ export default function DomainsManagement() {
 
               <div className="pt-4 flex items-center justify-end gap-3 border-t border-[var(--border)] mt-4">
                 <button type="button" onClick={closeModal} className="px-6 py-3 rounded-full font-bold text-[#57687f] hover:bg-[#F0F8FF]">Cancel</button>
-                <button type="submit" disabled={saving || !formData.name || !formData.categoryId} className="btn-primary flex items-center gap-2 px-8 py-3 rounded-full font-bold shadow-md text-white">
+                <button type="submit" disabled={saving || !formData.name || !formData.categoryId} className="btn-primary flex items-center gap-2 disabled:opacity-50">
                   {saving ? <Loader2 className="animate-spin" size={18} /> : 'Save Domain'}
                 </button>
               </div>

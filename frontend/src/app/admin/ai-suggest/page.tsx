@@ -83,7 +83,7 @@ export default function AISuggestInstitutions() {
             <button 
               type="submit" 
               disabled={loading || !domain.trim() || !country.trim()}
-              className="w-full btn-primary flex items-center justify-center gap-2 py-3.5 rounded-2xl shadow-md hover:scale-[1.02] disabled:opacity-50 transition-all"
+              className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {loading ? (
                 <><Loader2 size={18} className="animate-spin" /> Analyzing...</>

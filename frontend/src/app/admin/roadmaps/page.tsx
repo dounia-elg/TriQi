@@ -123,7 +123,7 @@ export default function RoadmapTemplatesManagement() {
             <p className="text-[#57687f] text-sm">Design structured learning paths mapped to student results.</p>
           </div>
         </div>
-        <button onClick={() => handleOpenModal()} className="btn-primary flex items-center gap-2 px-6 py-3 rounded-full font-bold shadow-md hover:scale-105 text-white">
+        <button onClick={() => handleOpenModal()} className="btn-primary flex items-center gap-2">
           <Plus size={18} /> Add Template
         </button>
       </div>
@@ -195,7 +195,7 @@ export default function RoadmapTemplatesManagement() {
               <div className="border-t border-[var(--border)] pt-6">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="font-bold text-[#1E293B] text-lg" style={{ fontFamily: 'Lora, serif' }}>Roadmap Timeline</h3>
-                  <button type="button" onClick={addWeek} className="btn-primary text-white text-sm flex items-center gap-2 px-4 py-2 rounded-full font-bold shadow-md"><Plus size={16}/> Add Week</button>
+                  <button type="button" onClick={addWeek} className="btn-primary flex items-center gap-2 px-4 py-2"><Plus size={16}/> Add Week</button>
                 </div>
                 
                 <div className="space-y-6">
@@ -228,7 +228,7 @@ export default function RoadmapTemplatesManagement() {
             
             <div className="p-6 border-t border-[var(--border)] bg-[#F0F8FF] flex justify-end gap-3 rounded-b-4xl">
               <button type="button" onClick={closeModal} className="px-6 py-3 rounded-full font-bold text-[#57687f]">Cancel</button>
-              <button type="submit" onClick={handleSubmit} disabled={saving || formData.weeks.length === 0 || !formData.categoryId} className="btn-primary flex items-center gap-2 px-8 py-3 rounded-full font-bold shadow-md text-white disabled:opacity-50">
+              <button type="submit" onClick={handleSubmit} disabled={saving || formData.weeks.length === 0 || !formData.categoryId} className="btn-primary flex items-center gap-2 disabled:opacity-50">
                 {saving ? <Loader2 className="animate-spin" size={18} /> : 'Save Template'}
               </button>
             </div>

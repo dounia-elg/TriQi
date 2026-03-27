@@ -110,7 +110,7 @@ export default function CategoriesManagement() {
         </div>
         <button 
           onClick={() => handleOpenModal()}
-          className="btn-primary flex items-center gap-2 px-6 py-3 rounded-full font-bold shadow-md hover:scale-105 transition-transform text-white"
+          className="btn-primary flex items-center gap-2"
         >
           <Plus size={18} /> Add Category
         </button>
@@ -202,7 +202,7 @@ export default function CategoriesManagement() {
                 <button 
                   type="submit" 
                   disabled={saving || !formData.name.trim()}
-                  className="btn-primary flex items-center gap-2 px-8 py-3 rounded-full font-bold shadow-md hover:scale-105 disabled:opacity-50 transition-all text-white"
+                  className="btn-primary flex items-center gap-2 disabled:opacity-50"
                 >
                   {saving ? <Loader2 size={18} className="animate-spin" /> : 'Save Category'}
                 </button>

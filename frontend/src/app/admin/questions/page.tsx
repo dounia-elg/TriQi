@@ -163,7 +163,7 @@ export default function QuestionsManagement() {
             <p className="text-[#57687f] text-sm">Design the orientation test questions, choices, and scoring logic.</p>
           </div>
         </div>
-        <button onClick={() => handleOpenModal()} className="btn-primary flex items-center gap-2 px-6 py-3 rounded-full font-bold shadow-md hover:scale-105 text-white">
+        <button onClick={() => handleOpenModal()} className="btn-primary flex items-center gap-2">
           <Plus size={18} /> Add Question
         </button>
       </div>
@@ -277,7 +277,7 @@ export default function QuestionsManagement() {
             
             <div className="p-6 border-t border-[var(--border)] bg-[#F0F8FF] flex justify-end gap-3 rounded-b-4xl">
               <button type="button" onClick={closeModal} className="px-6 py-3 rounded-full font-bold text-[#57687f]">Cancel</button>
-              <button type="submit" onClick={handleSubmit} disabled={saving || formData.choices.length === 0} className="btn-primary flex items-center gap-2 px-8 py-3 rounded-full font-bold shadow-md text-white disabled:opacity-50">
+              <button type="submit" onClick={handleSubmit} disabled={saving || formData.choices.length === 0} className="btn-primary flex items-center gap-2 disabled:opacity-50">
                 {saving ? <Loader2 className="animate-spin" size={18} /> : 'Save Question'}
               </button>
             </div>
