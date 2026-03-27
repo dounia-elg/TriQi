@@ -16,17 +16,28 @@ export default function LoginPage() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData]       = useState({ email: '', password: '' });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true); setError(null);
+    setIsLoading(true); 
+    setError(null);
     try {
       const response = await authService.login(formData);
-      login(response.token, response.user);
+      
+      const token = response.accessToken || response.token;
+      login(token, response.user);
+      
       setShowSuccess(true);
-      setTimeout(() => router.push('/'), 1500);
+      
+      const userRole = response.user?.role?.toUpperCase();
+      const redirectPath = userRole === 'ADMIN' ? '/admin' : '/';
+      
+      setTimeout(() => router.push(redirectPath), 1500);
+
     } catch (err: any) {
       setError(err.response?.data?.message || 'Invalid email or password. Please try again.');
-    } finally { setIsLoading(false); }
+    } finally { 
+      setIsLoading(false); 
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
