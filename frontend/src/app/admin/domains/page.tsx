@@ -162,8 +162,11 @@ export default function DomainsManagement() {
               <tr key={dom._id} className="border-b border-[var(--border)] last:border-0 hover:bg-[#F9FAFB]">
                 <td className="px-6 py-4 font-bold text-[#1E293B]">{dom.name}</td>
                 <td className="px-6 py-4 text-[#57687f]">
-                  {typeof dom.categoryId === 'object' ? dom.categoryId.name : 'Unknown'}
+                  {typeof dom.categoryId === 'object' 
+                    ? dom.categoryId.name 
+                    : categories.find(c => c._id === dom.categoryId)?.name || 'Unknown'}
                 </td>
+
                 <td className="px-6 py-4">
                   <div className="flex flex-wrap gap-1">
                     {dom.skills?.slice(0, 3).map((s, i) => (
