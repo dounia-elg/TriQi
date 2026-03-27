@@ -98,7 +98,7 @@ export default function CategoriesManagement() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between bg-white p-8 rounded-4xl border border-[var(--border)] shadow-sm">
+      <div className="flex items-center justify-between bg-white p-8 rounded-4xl border border-(--border) shadow-sm">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-[#ebf6fd] flex items-center justify-center text-[#1d638f]">
             <Layers size={24} />
@@ -117,10 +117,10 @@ export default function CategoriesManagement() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-4xl border border-[var(--border)] shadow-sm overflow-hidden">
+      <div className="bg-white rounded-4xl border border-(--border) shadow-sm overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-[#F0F8FF] text-[#8a9ab1] text-xs uppercase tracking-widest border-b border-[var(--border)]">
+            <tr className="bg-[#F0F8FF] text-[#8a9ab1] text-xs uppercase tracking-widest border-b border-(--border)">
               <th className="px-8 py-5 font-bold">Name</th>
               <th className="px-8 py-5 font-bold">Description</th>
               <th className="px-8 py-5 font-bold text-right">Actions</th>
@@ -132,7 +132,7 @@ export default function CategoriesManagement() {
                 <td colSpan={3} className="px-8 py-10 text-center text-[#57687f]">No categories found. Click 'Add Category' to create one.</td>
               </tr>
             ) : categories.map((cat) => (
-              <tr key={cat._id} className="border-b border-[var(--border)] last:border-0 hover:bg-[#F9FAFB] transition-colors">
+              <tr key={cat._id} className="border-b border-(--border) last:border-0 hover:bg-[#F9FAFB] transition-colors">
                 <td className="px-8 py-5 font-bold text-[#1E293B]">{cat.name}</td>
                 <td className="px-8 py-5 text-[#57687f] text-sm max-w-md truncate">{cat.description || '—'}</td>
                 <td className="px-8 py-5 text-right flex items-center justify-end gap-3">
@@ -159,7 +159,7 @@ export default function CategoriesManagement() {
       {isModalOpen && (
         <div className="fixed inset-0 bg-[#1E293B]/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-4xl w-full max-w-md shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between p-6 border-b border-[var(--border)] bg-[#F0F8FF]">
+            <div className="flex items-center justify-between p-6 border-b border-(--border) bg-[#F0F8FF]">
               <h2 className="text-xl font-bold text-[#1E293B]" style={{ fontFamily: 'Lora, serif' }}>
                 {editingId ? 'Edit Category' : 'New Category'}
               </h2>
