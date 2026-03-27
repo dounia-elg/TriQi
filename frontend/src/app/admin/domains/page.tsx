@@ -126,7 +126,7 @@ export default function DomainsManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between bg-white p-8 rounded-4xl border border-[var(--border)] shadow-sm">
+      <div className="flex items-center justify-between bg-white p-8 rounded-4xl border border-(--border) shadow-sm">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-[#effcfa] flex items-center justify-center text-[#2ba88a]">
             <Map size={24} />
@@ -144,10 +144,10 @@ export default function DomainsManagement() {
         </button>
       </div>
 
-      <div className="bg-white rounded-4xl border border-[var(--border)] shadow-sm overflow-hidden auto-x-scroll">
+      <div className="bg-white rounded-4xl border border-(--border) shadow-sm overflow-hidden auto-x-scroll">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-[#F0F8FF] text-[#8a9ab1] text-xs uppercase tracking-widest border-b border-[var(--border)]">
+            <tr className="bg-[#F0F8FF] text-[#8a9ab1] text-xs uppercase tracking-widest border-b border-(--border)">
               <th className="px-6 py-5 font-bold">Name</th>
               <th className="px-6 py-5 font-bold">Category</th>
               <th className="px-6 py-5 font-bold">Skills</th>
@@ -159,7 +159,7 @@ export default function DomainsManagement() {
             {domains.length === 0 ? (
               <tr><td colSpan={5} className="px-6 py-10 text-center text-[#57687f]">No domains registered yet.</td></tr>
             ) : domains.map((dom) => (
-              <tr key={dom._id} className="border-b border-[var(--border)] last:border-0 hover:bg-[#F9FAFB]">
+              <tr key={dom._id} className="border-b border-(--border) last:border-0 hover:bg-[#F9FAFB]">
                 <td className="px-6 py-4 font-bold text-[#1E293B]">{dom.name}</td>
                 <td className="px-6 py-4 text-[#57687f]">
                   {typeof dom.categoryId === 'object' 
@@ -193,7 +193,7 @@ export default function DomainsManagement() {
       {isModalOpen && (
         <div className="fixed inset-0 bg-[#1E293B]/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-4xl w-full max-w-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex justify-between p-6 border-b border-[var(--border)] bg-[#F0F8FF]">
+            <div className="flex justify-between p-6 border-b border-(--border) bg-[#F0F8FF]">
               <h2 className="text-xl font-bold text-[#1E293B]" style={{ fontFamily: 'Lora, serif' }}>{editingId ? 'Edit Domain' : 'New Domain'}</h2>
               <button onClick={closeModal} className="text-[#8a9ab1] hover:text-[#db81a2]"><X size={20} /></button>
             </div>
@@ -232,7 +232,7 @@ export default function DomainsManagement() {
                 <label htmlFor="isActive" className="text-sm font-bold text-[#1E293B] cursor-pointer">Active Domain</label>
               </div>
 
-              <div className="pt-4 flex items-center justify-end gap-3 border-t border-[var(--border)] mt-4">
+              <div className="pt-4 flex items-center justify-end gap-3 border-t border-(--border) mt-4">
                 <button type="button" onClick={closeModal} className="px-6 py-3 rounded-full font-bold text-[#57687f] hover:bg-[#F0F8FF]">Cancel</button>
                 <button type="submit" disabled={saving || !formData.name || !formData.categoryId} className="btn-primary flex items-center gap-2 disabled:opacity-50">
                   {saving ? <Loader2 className="animate-spin" size={18} /> : 'Save Domain'}
