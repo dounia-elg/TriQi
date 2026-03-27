@@ -22,10 +22,30 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
   if (!mounted || isLoading || !user) return null;
 
   const navItems = [
-    { label: 'Overview', href: '/dashboard', icon: LayoutDashboard },
-    { label: 'My Roadmap', href: '/dashboard/roadmap', icon: Map },
-    { label: 'Dream Institutions', href: '/dashboard/institutions', icon: School },
-    { label: 'Settings', href: '/dashboard/settings', icon: Settings },
+    { 
+      label: 'Overview', href: '/dashboard', icon: LayoutDashboard,
+      activeClass: 'bg-[var(--tint-blue)] text-[var(--primary)]',
+      hoverClass: 'hover:bg-[var(--tint-blue)] hover:text-[var(--primary)]',
+      iconColor: 'text-[var(--primary)]'
+    },
+    { 
+      label: 'My Roadmap', href: '/dashboard/roadmap', icon: Map,
+      activeClass: 'bg-[var(--tint-green)] text-[var(--accent)]',
+      hoverClass: 'hover:bg-[var(--tint-green)] hover:text-[var(--accent)]',
+      iconColor: 'text-[var(--accent)]'
+    },
+    { 
+      label: 'Dream Institutions', href: '/dashboard/institutions', icon: School,
+      activeClass: 'bg-[var(--tint-pink)] text-[var(--pink)]',
+      hoverClass: 'hover:bg-[var(--tint-pink)] hover:text-[var(--pink)]',
+      iconColor: 'text-[var(--pink)]'
+    },
+    { 
+      label: 'Settings', href: '/dashboard/settings', icon: Settings,
+      activeClass: 'bg-[var(--tint-purple)] text-[var(--purple)]',
+      hoverClass: 'hover:bg-[var(--tint-purple)] hover:text-[var(--purple)]',
+      iconColor: 'text-[var(--purple)]'
+    },
   ];
 
   return (
@@ -34,9 +54,9 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
       {/* Sidebar Navigation */}
       <aside className="w-72 bg-(--surface) border-r border-(--border) flex flex-col justify-between shadow-sm relative z-20">
         <div className="p-8">
-          <Link href="/" className="inline-block transform transition-transform hover:scale-105">
+          <div className="inline-block transform transition-transform hover:scale-105">
             <Logo />
-          </Link>
+          </div>
           
           <div className="mt-12 flex flex-col gap-2">
             <p className="text-xs font-bold text-(--dim) uppercase tracking-widest pl-4 mb-4">My Journey</p>
@@ -47,13 +67,13 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold transition-all ${
-                    isActive
-                      ? 'bg-(--tint-blue) text-(--primary)'
-                      : 'text-(--muted) hover:bg-(--bg) hover:text-(--primary)'
+                  className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold transition-all group ${
+                    isActive ? item.activeClass : `text-(--muted) ${item.hoverClass}`
                   }`}
                 >
-                  <Icon size={20} className={isActive ? "text-(--primary)" : "text-(--dim)"} />
+                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center transition-colors ${isActive ? 'bg-white shadow-sm' : 'bg-transparent group-hover:bg-white group-hover:shadow-sm'}`}>
+                    <Icon size={20} className={isActive ? item.iconColor : `text-(--dim) group-hover:${item.iconColor}`} />
+                  </div>
                   {item.label}
                 </Link>
               );
