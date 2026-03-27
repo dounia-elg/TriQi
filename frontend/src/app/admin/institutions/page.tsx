@@ -58,19 +58,32 @@ export default function InstitutionsManagement() {
 
   const closeModal = () => setIsModalOpen(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     
     const programsArray = formData.programsStr.split(',').map(s => s.trim()).filter(Boolean);
-    const payload = { ...formData, programs: programsArray };
+    
+    const { programsStr, ...restFormData } = formData;
+    
+    const payload: any = { ...restFormData, programs: programsArray };
+    
+    if (!payload.website) {
+      delete payload.website;
+    }
+    if (!payload.description) {
+      delete payload.description;
+    }
 
     try {
       if (editingId) await institutionsService.update(editingId, payload);
       else await institutionsService.create(payload);
       closeModal(); loadData();
-    } catch (error: any) { alert('Failed to save: ' + (error.response?.data?.message || 'Unknown error')); } finally { setSaving(false); }
+    } catch (error: any) { 
+      alert('Failed to save: ' + JSON.stringify(error.response?.data?.message || error.message)); 
+    } finally { setSaving(false); }
   };
+
 
   const handleDelete = async (id: string, name: string) => {
     if (confirm(`Delete the institution "${name}"?`)) {
