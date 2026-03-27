@@ -44,8 +44,8 @@ export default function DashboardResultsPage() {
   return (
     <div className="max-w-6xl mx-auto py-6">
       
-      {/* 🎯 Compact Top Match Hero */}
-      <div className="bg-white rounded-[32px] p-8 border border-(--border) shadow-sm mb-10 relative overflow-hidden">
+      {/*  Compact Top Match Hero */}
+      <div className="bg-white rounded-4xl p-8 border border-(--border) shadow-sm mb-10 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-(--tint-blue) rounded-full blur-3xl opacity-50 -translate-y-12 translate-x-12" />
           
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
@@ -60,7 +60,7 @@ export default function DashboardResultsPage() {
                   </Link>
               </div>
 
-              <div className="w-48 h-48 rounded-full border-[10px] border-(--tint-blue) flex flex-col items-center justify-center bg-white shadow-lg shrink-0">
+              <div className="w-48 h-48 rounded-full border-10 border-(--tint-blue) flex flex-col items-center justify-center bg-white shadow-lg shrink-0">
                   <span className="text-4xl font-black text-(--ink)">{Math.round(topMatch.score)}%</span>
                   <span className="text-[10px] font-black uppercase tracking-widest text-(--dim)">Match</span>
               </div>
