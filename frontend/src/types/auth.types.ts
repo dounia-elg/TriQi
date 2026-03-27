@@ -8,6 +8,7 @@ export interface User {
   ageRange?: string;
   city?: string;
   goal?: string;
+  hasCompletedTest?: boolean;
 }
 
 export interface AuthContextType {

@@ -34,9 +34,9 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
       {/* Sidebar Navigation */}
       <aside className="w-72 bg-(--surface) border-r border-(--border) flex flex-col justify-between shadow-sm relative z-20">
         <div className="p-8">
-          <Link href="/" className="inline-block transform transition-transform hover:scale-105">
+          <div className="inline-block transform transition-transform hover:scale-105">
             <Logo />
-          </Link>
+          </div>
           
           <div className="mt-12 flex flex-col gap-2">
             <p className="text-xs font-bold text-(--dim) uppercase tracking-widest pl-4 mb-4">My Journey</p>
