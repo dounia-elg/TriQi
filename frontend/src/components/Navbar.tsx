@@ -59,7 +59,7 @@ export default function Navbar() {
                   className="flex items-center gap-2 text-sm font-semibold transition-colors"
                   style={{ color: scrolled ? 'var(--ink)' : '#fff' }}
                 >
-                  <div className="w-8 h-8 rounded-full bg-[var(--blue)] flex items-center justify-center text-[var(--primary)] text-xs font-bold uppercase">
+                  <div className="w-8 h-8 rounded-full bg-(--blue) flex items-center justify-center text-(--primary) text-xs font-bold uppercase">
                     {user?.firstName?.[0]}
                   </div>
                   {user?.firstName}
