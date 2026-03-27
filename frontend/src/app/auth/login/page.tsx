@@ -29,7 +29,7 @@ export default function LoginPage() {
       setShowSuccess(true);
       
       const userRole = response.user?.role?.toUpperCase();
-      const redirectPath = userRole === 'ADMIN' ? '/admin' : '/';
+      const redirectPath = userRole === 'ADMIN' ? '/admin' : '/dashboard';
       
       setTimeout(() => router.push(redirectPath), 1500);
 
