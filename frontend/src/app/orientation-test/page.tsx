@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { questionsService } from '@/services/questions.service';
 import { resultsService } from '@/services/results.service';
+import { useAuth } from '@/contexts/AuthContext';
 import { 
   ChevronRight, ChevronLeft, Send, Loader2, 
   CheckCircle2, AlertCircle, Sparkles, BrainCircuit 
@@ -11,6 +12,7 @@ import {
 
 export default function OrientationTestPage() {
   const router = useRouter();
+  const { mergeUser } = useAuth();
   const [questions, setQuestions] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<{ questionId: string; choiceIndex: number }[]>([]);
@@ -66,12 +68,8 @@ export default function OrientationTestPage() {
     setIsSubmitting(true);
     try {
       await resultsService.submit(answers);
-      // Small delay for effect
-      setTimeout(() => {
-        router.push('/dashboard');
-        // Simple trick to ensure dashboard sees updated status
-        setTimeout(() => window.location.reload(), 100);
-      }, 1500);
+      mergeUser({ hasCompletedTest: true });
+      router.push('/dashboard');
     } catch (err) {
       setError("Failed to submit your test. Please try again.");
       setIsSubmitting(false);

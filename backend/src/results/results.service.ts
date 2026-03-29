@@ -7,6 +7,7 @@ import { ScoringService } from './scoring/scoring.service';
 import { QuestionsService } from '../questions/questions.service';
 import { DomainsService } from '../domains/domains.service';
 import { ExplanationService } from './explanation/explanation.service';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class ResultsService {
@@ -17,6 +18,7 @@ export class ResultsService {
         private questionsService: QuestionsService,
         private domainsService: DomainsService,
         private explanationService: ExplanationService,
+        private usersService: UsersService,
     ) { }
 
     async submitTest(userId: string, dto: SubmitTestDto) {
@@ -43,7 +45,9 @@ export class ResultsService {
             totalQuestions: dto.answers.length,
         });
 
-        return result.save();
+        const saved = await result.save();
+        await this.usersService.markTestCompleted(userId);
+        return saved;
     }
 
     async findByUser(userId: string): Promise<ResultDocument[]> {

@@ -7,6 +7,7 @@ import { Result, ResultSchema } from './result.schema';
 import { QuestionsModule } from '../questions/questions.module';
 import { DomainsModule } from '../domains/domains.module';
 import { ExplanationService } from './explanation/explanation.service';
+import { UsersModule } from '../users/users.module';
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { ExplanationService } from './explanation/explanation.service';
         ]),
         QuestionsModule,
         DomainsModule,
+        UsersModule,
     ],
     controllers: [ResultsController],
     providers: [ResultsService, ScoringService, ExplanationService],

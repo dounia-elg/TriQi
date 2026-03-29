@@ -24,6 +24,13 @@ export class UsersService {
     return this.userModel.findById(id).exec();
   }
 
+  async markTestCompleted(userId: string): Promise<void> {
+    await this.userModel.findByIdAndUpdate(userId, {
+      hasCompletedTest: true,
+      lastTestAt: new Date(),
+    });
+  }
+
   async updateProfile(userId: string, dto: UpdateProfileDto) {
     const update: Record<string, string> = {};
     for (const [key, value] of Object.entries(dto) as [keyof UpdateProfileDto, string | undefined][]) {

@@ -58,6 +58,7 @@ export class AuthService {
         ageRange: user.ageRange,
         city: user.city,
         goal: user.goal,
+        hasCompletedTest: user.hasCompletedTest,
       },
     };
   }

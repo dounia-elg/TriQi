@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { User, AuthContextType } from '@/types/auth.types';
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -34,14 +34,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('triqi_user', JSON.stringify(newUser));
   };
 
-  const mergeUser = (patch: Partial<User>) => {
+  const mergeUser = useCallback((patch: Partial<User>) => {
     setUser((prev) => {
       if (!prev) return null;
       const next = { ...prev, ...patch };
       localStorage.setItem('triqi_user', JSON.stringify(next));
       return next;
     });
-  };
+  }, []);
 
   const logout = () => {
     setToken(null);
