@@ -112,7 +112,7 @@ export default function DashboardResultsPage() {
 
               {/* CTAs Sidebar Version */}
               <div className="mt-8 space-y-3">
-                  <Link href="/dashboard" className="w-full bg-(--ink) text-white p-5 rounded-2xl flex items-center justify-between group hover:bg-slate-800 transition-all">
+                  <Link href="/dashboard/roadmap" className="w-full bg-(--ink) text-white p-5 rounded-2xl flex items-center justify-between group hover:bg-slate-800 transition-all">
                       <span className="font-bold text-sm">View Roadmap</span>
                       <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
