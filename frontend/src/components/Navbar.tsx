@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, LogOut, User as UserIcon } from 'lucide-react';
+import { Menu, X, LogOut } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -16,6 +16,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
+  const isAdmin = user?.role?.toUpperCase() === 'ADMIN';
+  const accountHomeHref = isAdmin ? '/admin' : '/dashboard';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -55,7 +57,7 @@ export default function Navbar() {
             {isAuthenticated ? (
               <div className="flex items-center gap-5">
                 <Link
-                  href="/dashboard"
+                  href={accountHomeHref}
                   className="flex items-center gap-2 text-sm font-semibold transition-colors"
                   style={{ color: scrolled ? 'var(--ink)' : '#fff' }}
                 >
@@ -122,7 +124,14 @@ export default function Navbar() {
               </Link>
             ))}
             {isAuthenticated && (
-              <Link href="/dashboard" className="text-2xl font-bold font-serif" style={{ color: 'var(--primary)' }} onClick={() => setIsOpen(false)}>My Dashboard</Link>
+              <Link
+                href={accountHomeHref}
+                className="text-2xl font-bold font-serif"
+                style={{ color: 'var(--primary)' }}
+                onClick={() => setIsOpen(false)}
+              >
+                {isAdmin ? 'Admin dashboard' : 'My dashboard'}
+              </Link>
             )}
           </div>
 
