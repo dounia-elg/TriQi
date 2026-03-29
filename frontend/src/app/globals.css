@@ -336,3 +336,137 @@ h5 {
   width: calc(100% + 1.3px);
   height: 72px;
 }
+.roadmap-rainbow-bg {
+background:
+radial-gradient(circle at 10% 10%, color-mix(in srgb, var(--pink) 20%, transparent) 0%, transparent 36%),
+radial-gradient(circle at 90% 20%, color-mix(in srgb, var(--green) 22%, transparent) 0%, transparent 38%),
+radial-gradient(circle at 80% 85%, color-mix(in srgb, var(--yellow) 25%, transparent) 0%, transparent 34%),
+radial-gradient(circle at 15% 80%, color-mix(in srgb, var(--blue) 22%, transparent) 0%, transparent 36%);
+}
+
+.duration-card {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+border: 1px solid var(--border);
+border-radius: 18px;
+padding: 14px 18px;
+font-weight: 700;
+color: var(--muted);
+background: white;
+transition: all 0.2s ease;
+}
+.duration-card:hover {
+transform: translateY(-1px);
+border-color: var(--primary);
+color: var(--primary);
+box-shadow: 0 10px 26px rgba(29, 99, 143, 0.12);
+}
+
+.duration-card.active {
+border-color: var(--accent);
+background: var(--tint-green);
+color: var(--accent);
+}
+
+.roadmap-week-card {
+transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+}
+
+.roadmap-week-card:hover {
+transform: translateY(-2px);
+border-color: color-mix(in srgb, var(--primary) 36%, white);
+box-shadow: 0 14px 30px rgba(29, 99, 143, 0.08);
+}
+.task-row {
+border: 1px solid var(--border);
+border-radius: 18px;
+padding: 14px;
+display: flex;
+align-items: flex-start;
+gap: 12px;
+transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.task-pending {
+background: white;
+}
+
+.task-pending:hover {
+border-color: color-mix(in srgb, var(--primary) 40%, white);
+background: color-mix(in srgb, var(--tint-blue) 45%, white);
+}
+
+.task-done {
+background: var(--tint-green);
+border-color: color-mix(in srgb, var(--accent) 35%, white);
+}
+
+.task-title {
+font-size: 15px;
+line-height: 1.35;
+font-weight: 800;
+color: var(--ink);
+}
+.task-title.done {
+text-decoration: line-through;
+color: var(--muted);
+opacity: 0.9;
+}
+
+.tip-box {
+border: 1px dashed color-mix(in srgb, var(--yellow) 45%, white);
+background: var(--tint-yellow);
+border-radius: 14px;
+padding: 10px;
+}
+
+.status-pill {
+font-size: 10px;
+font-weight: 900;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+padding: 6px 10px;
+border-radius: 999px;
+white-space: nowrap;
+}
+
+.status-pill-done {
+color: var(--accent);
+background: var(--tint-green);
+border: 1px solid color-mix(in srgb, var(--accent) 45%, white);
+}
+.status-pill-pending {
+color: #9a7a00;
+background: var(--tint-yellow);
+border: 1px solid color-mix(in srgb, var(--yellow) 50%, white);
+}
+
+.stat-chip {
+border-radius: 14px;
+padding: 10px 12px;
+font-weight: 800;
+font-size: 13px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.stat-chip-green {
+color: var(--accent);
+background: var(--tint-green);
+border: 1px solid color-mix(in srgb, var(--accent) 35%, white);
+}
+
+.stat-chip-yellow {
+color: #9a7a00;
+background: var(--tint-yellow);
+border: 1px solid color-mix(in srgb, var(--yellow) 45%, white);
+}
+
+.stat-chip-blue {
+color: var(--primary);
+background: var(--tint-blue);
+border: 1px solid color-mix(in srgb, var(--primary) 35%, white);
+}
