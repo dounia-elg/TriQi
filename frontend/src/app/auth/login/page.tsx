@@ -30,8 +30,7 @@ export default function LoginPage() {
       
       const userRole = response.user?.role?.toUpperCase();
       const redirectPath = userRole === 'ADMIN' ? '/admin' : '/dashboard';
-      
-      setTimeout(() => router.push(redirectPath), 1500);
+      router.push(redirectPath);
 
     } catch (err: any) {
       setError(err.response?.data?.message || 'Invalid email or password. Please try again.');

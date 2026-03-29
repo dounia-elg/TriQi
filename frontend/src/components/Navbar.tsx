@@ -55,7 +55,7 @@ export default function Navbar() {
             {isAuthenticated ? (
               <div className="flex items-center gap-5">
                 <Link
-                  href="/profile"
+                  href="/dashboard"
                   className="flex items-center gap-2 text-sm font-semibold transition-colors"
                   style={{ color: scrolled ? 'var(--ink)' : '#fff' }}
                 >
@@ -122,7 +122,7 @@ export default function Navbar() {
               </Link>
             ))}
             {isAuthenticated && (
-              <Link href="/profile" className="text-2xl font-bold font-serif" style={{ color: 'var(--primary)' }} onClick={() => setIsOpen(false)}>My Profile</Link>
+              <Link href="/dashboard" className="text-2xl font-bold font-serif" style={{ color: 'var(--primary)' }} onClick={() => setIsOpen(false)}>My Dashboard</Link>
             )}
           </div>
 

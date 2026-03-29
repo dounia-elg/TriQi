@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { LayoutDashboard, Map, School, Settings, LogOut, Bell, UserIcon, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Map, School, User, LogOut, Bell, Sparkles } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import Logo from '@/components/Logo';
 
@@ -47,7 +47,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
       iconColor: 'text-[var(--pink)]'
     },
     { 
-      label: 'Settings', href: '/dashboard/settings', icon: Settings,
+      label: 'Profile', href: '/dashboard/profile', icon: User,
       activeClass: 'bg-[var(--tint-purple)] text-[var(--purple)]',
       hoverClass: 'hover:bg-[var(--tint-purple)] hover:text-[var(--purple)]',
       iconColor: 'text-[var(--purple)]'
