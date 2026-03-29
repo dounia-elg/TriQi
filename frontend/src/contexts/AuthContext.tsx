@@ -34,6 +34,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('triqi_user', JSON.stringify(newUser));
   };
 
+  const mergeUser = (patch: Partial<User>) => {
+    setUser((prev) => {
+      if (!prev) return null;
+      const next = { ...prev, ...patch };
+      localStorage.setItem('triqi_user', JSON.stringify(next));
+      return next;
+    });
+  };
+
   const logout = () => {
     setToken(null);
     setUser(null);
@@ -46,6 +55,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     token,
     isLoading,
     login,
+    mergeUser,
     logout,
     isAuthenticated: !!token,
   };

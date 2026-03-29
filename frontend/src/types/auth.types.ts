@@ -8,6 +8,7 @@ export interface User {
   ageRange?: string;
   city?: string;
   goal?: string;
+  language?: string;
   hasCompletedTest?: boolean;
 }
 
@@ -16,6 +17,7 @@ export interface AuthContextType {
   token: string | null;
   isLoading: boolean;
   login: (token: string, user: User) => void;
+  mergeUser: (patch: Partial<User>) => void;
   logout: () => void;
   isAuthenticated: boolean;
 }
