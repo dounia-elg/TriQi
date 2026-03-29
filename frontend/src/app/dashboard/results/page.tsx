@@ -116,7 +116,7 @@ export default function DashboardResultsPage() {
                       <span className="font-bold text-sm">View Roadmap</span>
                       <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
-                  <Link href="/institutions" className="w-full bg-white border border-(--border) text-(--ink) p-5 rounded-2xl flex items-center justify-between group hover:border-(--primary) transition-all">
+                  <Link href="/dashboard/institutions" className="w-full bg-white border border-(--border) text-(--ink) p-5 rounded-2xl flex items-center justify-between group hover:border-(--primary) transition-all">
                       <span className="font-bold text-sm">Find Schools</span>
                       <ArrowRight size={18} className="text-(--primary) group-hover:translate-x-1 transition-transform" />
                   </Link>
