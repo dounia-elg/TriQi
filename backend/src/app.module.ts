@@ -10,7 +10,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { RoadmapTemplatesModule } from './roadmap-templates/roadmap-templates.module';
 import { InstitutionsModule } from './institutions/institutions.module';
 import { RoadmapsModule } from './roadmaps/roadmaps.module';
-
+import { AdminModule } from './admin/admin.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -37,6 +37,7 @@ import { AiModule } from './ai/ai.module';
     AiModule,
     InstitutionsModule,
     RoadmapsModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

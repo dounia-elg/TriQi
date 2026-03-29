@@ -24,6 +24,10 @@ export class UsersService {
     return this.userModel.findById(id).exec();
   }
 
+  async count(): Promise<number> {
+    return this.userModel.countDocuments().exec();
+  }
+
   async markTestCompleted(userId: string): Promise<void> {
     await this.userModel.findByIdAndUpdate(userId, {
       hasCompletedTest: true,

@@ -20,6 +20,10 @@ export class QuestionsService {
   async findAll(): Promise<QuestionDocument[]> {
     return this.questionModel.find({ isActive: true });
   }
+
+  async countActive(): Promise<number> {
+    return this.questionModel.countDocuments({ isActive: true }).exec();
+  }
   async findAllAdmin(): Promise<QuestionDocument[]> {
     return this.questionModel.find();
   }

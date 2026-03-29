@@ -21,6 +21,10 @@ export class DomainsService {
     return this.domainModel.find();
   }
 
+  async count(): Promise<number> {
+    return this.domainModel.countDocuments().exec();
+  }
+
   async findOne(id: string): Promise<DomainDocument> {
     const domain = await this.domainModel.findById(id);
     if (!domain) {

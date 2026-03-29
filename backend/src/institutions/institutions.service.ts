@@ -43,6 +43,10 @@ export class InstitutionsService {
   async findAll(): Promise<InstitutionDocument[]> {
     return this.institutionModel.find({ isActive: true });
   }
+
+  async countActive(): Promise<number> {
+    return this.institutionModel.countDocuments({ isActive: true }).exec();
+  }
   async findAllAdmin(): Promise<InstitutionDocument[]> {
     return this.institutionModel.find();
   }
