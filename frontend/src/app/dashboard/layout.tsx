@@ -1,19 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { LayoutDashboard, Map, School, User, LogOut, Bell, Sparkles } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useMounted } from '@/hooks/use-mounted';
 import Logo from '@/components/Logo';
 
 export default function UserDashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, logout, isLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => { setMounted(true); }, []);
+  const mounted = useMounted();
 
   useEffect(() => {
     if (!isLoading && !user) router.push('/auth/login');
