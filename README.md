@@ -1,245 +1,372 @@
-# TriQi 🧭
-> Plateforme d'orientation personnelle et professionnelle — NestJS · Next.js · MongoDB
+# TriQi
 
----
+TriQi is a full-stack orientation platform that helps users discover suitable academic and career paths.
 
-## 📖 About
+It combines:
+- A guided orientation questionnaire
+- A weighted scoring engine
+- Ranked domain recommendations with explanations
+- Personalized roadmap generation
+- Admin tools for managing orientation content
 
-**TriQi** helps young people in Morocco discover their academic and professional path through:
-- A structured **orientation test** (interests, personality, abilities)
-- A **smart scoring engine** that ranks compatible domains
-- A personalized **roadmap** (3–6 months action plan)
-- **Explanations** based on score intensity
-- An **Admin panel** to manage all content
+## Table of Contents
 
----
+- Overview
+- Tech Stack
+- Monorepo Structure
+- Core Features
+- Architecture Summary
+- Environment Variables
+- Getting Started (Local)
+- Getting Started (Docker)
+- Available Scripts
+- API Overview
+- Authentication and Roles
+- Testing Strategy
+- CI Pipeline (GitHub Actions)
+- Troubleshooting
+- Roadmap
+- License
 
-## ✨ Features
+## Overview
 
-### 👤 User
-| Feature | Status |
-|---------|--------|
-| Register / Login (JWT) | ✅ |
-| Orientation test (weighted questions) | ✅ |
-| Results with ranked domains + explanations | ✅ |
-| Roadmap generation (3 or 6 months) | ✅ |
-| Task progress tracking | ✅ |
-| Result history | ✅ |
-| Notifications (WebSocket) | 🔜 |
-| Dashboard (stats + charts) | 🔜 |
-| Recommended institutions | 🔜 |
+TriQi contains two main applications:
+- Backend API: NestJS application in [backend](backend)
+- Frontend web app: Next.js application in [frontend](frontend)
 
-### 🛠️ Admin
-| Feature | Status |
-|---------|--------|
-| CRUD Categories | ✅ |
-| CRUD Domains (linked to category) | ✅ |
-| CRUD Questions (choices + weights) | ✅ |
-| CRUD Roadmap Templates | ✅ |
-| CRUD Institutions | 🔜 |
-| Global statistics | 🔜 |
+The backend provides authentication, domain content management, result generation, and roadmap logic.
+The frontend consumes backend APIs and offers user and admin interfaces.
 
----
+## Tech Stack
 
-## 🧱 Tech Stack
+### Backend
+- NestJS (TypeScript)
+- MongoDB + Mongoose
+- JWT authentication (Passport + bcrypt)
+- Validation with class-validator and class-transformer
+- Jest for tests
 
-| Layer | Technology |
-|-------|-----------|
-| **Backend** | NestJS (TypeScript), Modular Architecture |
-| **Database** | MongoDB + Mongoose |
-| **Auth** | JWT + bcrypt + Passport |
-| **Validation** | class-validator + class-transformer |
-| **Tests** | Jest (unit + e2e) |
-| **Frontend** | Next.js (TypeScript) + Tailwind CSS *(coming)* |
-| **DevOps** | Docker + GitHub Actions CI/CD *(coming)* |
+### Frontend
+- Next.js (App Router)
+- React + TypeScript
+- Axios for API communication
 
----
+### DevOps
+- Docker + Docker Compose
+- GitHub Actions CI workflow
 
-## 📁 Project Structure
+## Monorepo Structure
 
-```
+```text
 TriQi/
-├── backend/                   # NestJS API
+├── backend/
+│   ├── Dockerfile
+│   ├── .dockerignore
+│   ├── package.json
 │   ├── src/
-│   │   ├── auth/              # Register, Login, JWT, Guards, Roles
-│   │   ├── users/             # User schema + service
-│   │   ├── categories/        # Category CRUD (Admin)
-│   │   ├── domains/           # Domain CRUD (linked to category)
-│   │   ├── questions/         # Question CRUD (choices + weights)
+│   │   ├── admin/
+│   │   ├── ai/
+│   │   ├── auth/
+│   │   ├── categories/
+│   │   ├── domains/
+│   │   ├── institutions/
+│   │   ├── questions/
 │   │   ├── results/
-│   │   │   ├── scoring/       # Scoring engine (pure logic)
-│   │   │   └── explanation/   # Explanation templates (high/medium/low)
-│   │   ├── roadmap-templates/ # Template CRUD (Admin)
-│   │   └── roadmaps/          # Roadmap generation + progress tracking
-│   ├── .env.example
-│   └── package.json
-└── frontend/                  # Next.js app (coming soon)
+│   │   ├── roadmap-templates/
+│   │   ├── roadmaps/
+│   │   └── users/
+│   └── test/
+├── frontend/
+│   ├── Dockerfile
+│   ├── .dockerignore
+│   ├── package.json
+│   └── src/
+├── docker-compose.yml
+├── .env.example
+└── .github/
+    └── workflows/
+        └── ci.yml
 ```
 
----
+## Core Features
 
-## 🚀 Getting Started
+### User
+- Register and login with JWT
+- Complete orientation questionnaire
+- Get ranked domains and explanations
+- Generate and track personal roadmaps
+- Access result history
+
+### Admin
+- Manage categories
+- Manage domains linked to categories
+- Manage questionnaire items and weights
+- Manage roadmap templates
+- Manage institutions (module present, evolving)
+
+## Architecture Summary
+
+### Backend modules
+Key domain modules are organized in [backend/src](backend/src):
+- Authentication and authorization in [backend/src/auth](backend/src/auth)
+- Content and taxonomy in [backend/src/categories](backend/src/categories), [backend/src/domains](backend/src/domains), and [backend/src/questions](backend/src/questions)
+- Result computation in [backend/src/results](backend/src/results)
+- Roadmap generation in [backend/src/roadmaps](backend/src/roadmaps) and [backend/src/roadmap-templates](backend/src/roadmap-templates)
+
+### Frontend API integration
+The frontend API client is defined in [frontend/src/services/api.ts](frontend/src/services/api.ts).
+It uses NEXT_PUBLIC_API_URL as base URL and injects JWT from local storage.
+
+## Environment Variables
+
+Project-level environment variables are listed in [.env.example](.env.example).
+
+### Required for backend
+- PORT: backend listening port (default 3001)
+- MONGO_URI: MongoDB connection string
+- JWT_SECRET: JWT signing secret
+
+### Required for frontend
+- NEXT_PUBLIC_API_URL: backend base URL exposed to browser code
+
+### Docker-related
+- FRONTEND_PORT: host port bound to frontend container
+- BACKEND_PORT: host port bound to backend container
+- MONGO_PORT: host port bound to MongoDB container
+
+## Getting Started (Local)
 
 ### Prerequisites
-- Node.js v18+
-- MongoDB running locally or [MongoDB Atlas](https://www.mongodb.com/atlas)
+- Node.js 20+
+- npm 10+
+- MongoDB running locally or on Atlas
 
-### 1. Clone the repo
+### 1) Clone repository
+
 ```bash
 git clone https://github.com/your-username/TriQi.git
-cd TriQi/backend
+cd TriQi
 ```
 
-### 2. Install dependencies
+### 2) Install dependencies
+
 ```bash
+cd backend
 npm install
+cd ../frontend
+npm install
+cd ..
 ```
 
-### 3. Configure environment
-Copy the example and fill in your values:
-```bash
-cp .env.example .env
-```
+### 3) Configure environment
+
+Create a backend environment file at backend/.env:
 
 ```env
 PORT=3001
 MONGO_URI=mongodb://127.0.0.1:27017/triqi
-JWT_SECRET=your_super_secret_key_here
+JWT_SECRET=replace_with_a_secure_secret
 ```
 
-### 4. Run in development mode
+Optional frontend environment file at frontend/.env.local:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3001
+```
+
+### 4) Run backend
+
 ```bash
+cd backend
 npm run start:dev
 ```
 
-API available at: `http://localhost:3001`
+Backend URL:
+- http://localhost:3001
 
----
-
-## 🔌 API Endpoints
-
-### Auth — Public
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/auth/register` | Register a new user |
-| POST | `/auth/login` | Login and get JWT token |
-
-### Categories — ADMIN only
-| Method | Endpoint |
-|--------|----------|
-| POST | `/categories` |
-| GET | `/categories` |
-| GET | `/categories/:id` |
-| PATCH | `/categories/:id` |
-| DELETE | `/categories/:id` |
-
-### Domains — ADMIN write / USER read
-| Method | Endpoint | Access |
-|--------|----------|--------|
-| POST | `/domains` | ADMIN |
-| GET | `/domains` | USER + ADMIN |
-| GET | `/domains/:id` | USER + ADMIN |
-| PATCH | `/domains/:id` | ADMIN |
-| DELETE | `/domains/:id` | ADMIN |
-
-### Questions — ADMIN write / USER read
-| Method | Endpoint | Access |
-|--------|----------|--------|
-| POST | `/questions` | ADMIN |
-| GET | `/questions` | USER (active only) |
-| GET | `/questions/admin` | ADMIN (all) |
-| PATCH | `/questions/:id` | ADMIN |
-| DELETE | `/questions/:id` | ADMIN |
-
-### Results — Orientation Engine
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/results/submit` | Submit answers → ranked domains + explanations |
-| GET | `/results/my` | Full result history |
-| GET | `/results/my/latest` | Latest result only |
-
-### Roadmap Templates — ADMIN only
-| Method | Endpoint |
-|--------|----------|
-| POST | `/roadmap-templates` |
-| GET | `/roadmap-templates` |
-| PATCH | `/roadmap-templates/:id` |
-| DELETE | `/roadmap-templates/:id` |
-
-### Roadmaps — USER
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/roadmaps/generate` | Generate roadmap from latest result |
-| GET | `/roadmaps/my` | Get current roadmap |
-| PATCH | `/roadmaps/tasks/:taskId` | Mark task PENDING / DONE |
-
----
-
-## 🔐 Authentication
-
-All protected routes require:
-```
-Authorization: Bearer <token>
-```
-
-Get a token via `POST /auth/login`.
-
-| Role | Permissions |
-|------|-------------|
-| `USER` | Take test, view results, manage own roadmap |
-| `ADMIN` | Full access + content management |
-
----
-
-## 🧠 How the Scoring Engine Works
-
-```
-User submits answers
-    ↓
-For each answer → find the question → get chosen option's weights
-    ↓
-Add weights to each domain's total score
-    ↓
-Sort domains by score (highest first)
-    ↓
-Generate explanation (high / medium / low) for top 3 domains
-    ↓
-Save result to MongoDB
-```
-
----
-
-## 🗺️ How the Roadmap Engine Works
-
-```
-POST /roadmaps/generate
-    ↓
-Fetch latest test result → get top domain + categoryId
-    ↓
-Find RoadmapTemplate by (categoryId + durationMonths)
-    ↓
-Found  → copy template weeks/tasks, replace {{domainName}}
-Not found → generate fallback weeks automatically
-    ↓
-Save roadmap (progressPercent = 0)
-```
-
----
-
-## 🧪 Tests
+### 5) Run frontend (new terminal)
 
 ```bash
-npm test              # unit tests
-npm run test:cov      # with coverage
-npm run test:e2e      # end-to-end
+cd frontend
+npm run dev
 ```
 
-Tests cover: Auth, Guards, Domains, Questions, Categories, Scoring, Explanation, RoadmapTemplates, RoadmapGenerator.
+Frontend URL:
+- http://localhost:3000
 
+## Getting Started (Docker)
 
----
+### 1) Create root .env file
 
-## 📄 License
+```bash
+cp .env.example .env
+```
+
+### 2) Build and run services
+
+```bash
+docker compose up --build
+```
+
+Services:
+- Frontend: http://localhost:3000
+- Backend: http://localhost:3001
+- MongoDB: localhost:27017
+
+### 3) Stop services
+
+```bash
+docker compose down
+```
+
+To remove persisted Mongo volume:
+
+```bash
+docker compose down -v
+```
+
+## Available Scripts
+
+### Backend scripts
+From [backend/package.json](backend/package.json):
+- npm run start
+- npm run start:dev
+- npm run start:prod
+- npm run build
+- npm run lint
+- npm run test
+- npm run test:cov
+- npm run test:e2e
+
+### Frontend scripts
+From [frontend/package.json](frontend/package.json):
+- npm run dev
+- npm run build
+- npm run start
+- npm run lint
+
+## API Overview
+
+### Auth
+- POST /auth/register
+- POST /auth/login
+
+### Categories
+- POST /categories
+- GET /categories
+- GET /categories/:id
+- PATCH /categories/:id
+- DELETE /categories/:id
+
+### Domains
+- POST /domains
+- GET /domains
+- GET /domains/:id
+- PATCH /domains/:id
+- DELETE /domains/:id
+
+### Questions
+- POST /questions
+- GET /questions
+- GET /questions/admin
+- PATCH /questions/:id
+- DELETE /questions/:id
+
+### Results
+- POST /results/submit
+- GET /results/my
+- GET /results/my/latest
+
+### Roadmap templates
+- POST /roadmap-templates
+- GET /roadmap-templates
+- PATCH /roadmap-templates/:id
+- DELETE /roadmap-templates/:id
+
+### Roadmaps
+- POST /roadmaps/generate
+- GET /roadmaps/my
+- PATCH /roadmaps/tasks/:taskId
+
+## Authentication and Roles
+
+Protected routes require:
+
+```text
+Authorization: Bearer <jwt-token>
+```
+
+Roles:
+- USER: complete test, view results, manage own roadmap
+- ADMIN: content management and admin operations
+
+## Testing Strategy
+
+Backend test types:
+- Unit tests for services and core logic
+- E2E tests in [backend/test](backend/test)
+
+Run backend tests:
+
+```bash
+cd backend
+npm run test
+npm run test:cov
+npm run test:e2e
+```
+
+Frontend currently has lint/build checks in CI. Add frontend tests later as test coverage grows.
+
+## CI Pipeline (GitHub Actions)
+
+Workflow file:
+- [.github/workflows/ci.yml](.github/workflows/ci.yml)
+
+Triggers:
+- push
+- pull_request
+
+Jobs:
+- Backend job: install, lint, test, build
+- Frontend job: install, lint, test if present, build
+
+Caching:
+- npm cache enabled per app using each lockfile
+
+Failure behavior:
+- If any step fails, the workflow fails
+
+## Troubleshooting
+
+### docker compose up --build fails
+- Ensure Docker Desktop is running
+- Ensure ports 3000, 3001, and 27017 are free
+- Check logs:
+
+```bash
+docker compose logs -f backend
+docker compose logs -f frontend
+docker compose logs -f mongo
+```
+
+### Backend cannot connect to Mongo
+- Verify MONGO_URI in root .env for Docker
+- For local run, verify backend/.env points to a reachable Mongo instance
+
+### CORS or frontend API issues
+- Verify NEXT_PUBLIC_API_URL points to backend URL
+- Verify backend is listening on PORT used by frontend
+
+## Roadmap
+
+Planned and in-progress items include:
+- Dashboard and analytics views
+- Real-time notifications
+- Enhanced institution recommendation flow
+- Expanded frontend automated testing
+
+## License
 
 Built for educational purposes.
-**TriQi** — Dounia Elgarrai © 2026
+
+TriQi - Dounia Elgarrai - 2026
