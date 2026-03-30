@@ -1,0 +1,54 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: triqi-mongo
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - triqi-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: triqi-backend
+    environment:
+      PORT: ${PORT:-3001}
+      MONGO_URI: ${MONGO_URI:-mongodb://mongo:27017/triqi}
+      JWT_SECRET: ${JWT_SECRET:-change_me_before_prod}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "${BACKEND_PORT:-3001}:3001"
+    networks:
+      - triqi-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: triqi-frontend
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3001}
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    networks:
+      - triqi-network
+
+volumes:
+  mongo_data:
+
+networks:
+  triqi-network:
+    driver: bridge
