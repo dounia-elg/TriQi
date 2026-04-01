@@ -22,7 +22,11 @@ export default function ProtectedRoute({
     else if (adminOnly && user?.role !== 'ADMIN') router.push('/');
   }, [isAuthenticated, isLoading, adminOnly, user, router]);
 
-  if (isLoading) return <div className="min-h-screen flex items-center justify-center"><p className="text-gray-500">Loading...</p></div>;
+  if (isLoading) return (
+    <div className="min-h-screen flex items-center justify-center bg-(--bg)">
+      <div className="w-12 h-12 border-4 border-(--primary) border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
   if (!isAuthenticated) return null;
   if (adminOnly && user?.role !== 'ADMIN') return null;
   
